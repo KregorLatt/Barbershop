@@ -21,3 +21,11 @@ exports.create = (newBarber) =>{
     data.push(newBarber)
         return newBarber
 }
+
+app.get("/barbers", (req, res) => {
+    res.send(barbers.getAll())
+})
+
+app.get("/barbers/:id", (req, res) => {
+    res.send(barbers.getById(req.params.id))
+})
