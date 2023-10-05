@@ -21,11 +21,9 @@ exports.create = (newBarber) =>{
     data.push(newBarber)
         return newBarber
 }
-
-app.get("/barbers", (req, res) => {
-    res.send(barbers.getAll())
-})
-
-app.get("/barbers/:id", (req, res) => {
-    res.send(barbers.getById(req.params.id))
-})
+exports.delete = (id)=>{
+    var toBeDeleted = this.getById(id)
+    if(toBeDeleted=== undefined) return
+    data = data.filter((e) => toBeDeleted.id != e.id)
+    return toBeDeleted
+}
