@@ -5,7 +5,13 @@ let data= [
     {id:4,name:"Lauri",Contact_details:"Lauri@gmail.com"}
 ]
 
+exports.getAll = () => {
+    return data.map(g => { return { "id": g.id, "name": g.name, "location": g.location, "capacity": g.capacity } })
+}
 
+exports.getById = (id) => {
+    return data.find((thing) => thing.id = parseInt(id))
+}
 
 exports.create = (newVenue) => {
     const newId = Math.max(...data.map((thing) => thing.id) + 1)
