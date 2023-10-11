@@ -1,10 +1,9 @@
 let data= [
-    {id:1,name:"Kaire",Contact_details:"Kaire@gmail.com"},
-    {id:2,name:"Maire",Contact_details:"Maire@gmail.com"},
-    {id:3,name:"Toomas",Contact_details:"Toomas@gmail.com"},
-    {id:4,name:"Lauri",Contact_details:"Lauri@gmail.com"}
+    {id:1,Service_name:"Kaire",Price:10,Description:"Masinlõikus"},
+    {id:2,Service_name:"Maire",Price:20,Description:"Värvimine"},
+    {id:1,Service_name:"Juss",Price:25,Description:"Masinlõikus"},
+    {id:1,Service_name:"Maiko",Price:50,Description:"Keemilised lokid"}
 ]
-
 
 
 
