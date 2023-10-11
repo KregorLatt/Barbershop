@@ -7,4 +7,9 @@ let data= [
 
 
 
-
+exports.create = (newVenue) => {
+    const newId = Math.max(...data.map((thing) => thing.id) + 1)
+    newVenue.id = newId
+    data.push(newVenue)
+    return newVenue
+}

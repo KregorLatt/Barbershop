@@ -31,7 +31,22 @@ app.listen(port, () => {
     console.log(`API up at: http://localhost:${port}`);
 })
 
-
+app.post("/barbers", (req, res) => {
+    if (!req.body.name || !req.body.Contact_details) {
+        return res.status(400).send({ error: "One or all required parameters are missing." })
+    }
+    const createdBarber = barbers.create({
+        name: req.body.name,
+        Contact_details: req.body.Contact_details
+    })
+    res.status(201)
+        .location(`${getBaseurl(req)}/barbers/${createdBarber.id}`)
+        .send(createdBarber)
+})
+function getBaseurl (request){
+    return (request.connection && request.connection.encrypted ? "https" : "http") 
+            + "://" + request.headers.host
+}
 
 
 
