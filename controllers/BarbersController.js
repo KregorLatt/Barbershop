@@ -1,38 +1,50 @@
 const { db } = require("../db")
-const barbers =db.barbers
+const barbers = db.barbers
 const { getBaseurl } = require("./helpers")
 
 // CREATE
-exports.createNew = (req, res) => {
-    if (!req.body.name) {
-        return res.status(400).send({ error: "Required parameter 'name' is missing" })
+exports.createNew = async (req, res) => {
+    if (!req.body.name || !req.body.price) {
+        return res.status(400).send({ error: "One or all required parameters are missing" })
     }
-    const createdBarber = barbers.create({
-        name: req.body.name
+    const createdBarber = await barbers.create(req.body, {
+        fields: ["name", "Contact_details"]
     })
     res.status(201)
-        .location(`${getBaseurl(req)}/barbers/${createdBarber.id}`)
-        .send(createdBarber)
+        .location(`${getBaseurl(req)}/barber/${createdBarber.id}`)
+        .json(createdBarber)
 }
 // READ
 exports.getAll = async (req, res) => {
     const result = await barbers.findAll({ attributes: ["id", "name"] })
     res.json(result)
 }
-exports.getById = (req, res) => {
-    const foundBarber = barbers.getById(req.params.id)
-    if (foundBarber === undefined) {
+exports.getById = async (req, res) => {
+    const foundBarber = await barbers.findByPk(req.params.id)
+    if (foundBarber === null) {
         return res.status(404).send({ error: `Barber not found` })
     }
-    res.send(foundBarber)
+    res.json(foundBarber)
 }
 // UPDATE
-exports.editById = (req, res) => {
-
+exports.editById = async (req, res) => {
+    const updateResult = await barbers.update({ ...req.body }, {
+        where: { id: req.params.id },
+        fields: ["name", "Contact_details"]
+    })
+    if (updateResult[0] == 0) {
+        return res.status(404).send({ error: "Barber not found" })
+    }
+    res.status(204)
+        .location(`${getBaseurl(req)}/barbers/${req.params.id}`)
+        .send()
 }
 // DELETE
-exports.deleteById = (req, res) => {
-    if (barbers.delete(req.params.id) === undefined) {
+exports.deleteById = async (req, res) => {
+    const deletedAmount = await barbers.destroy({
+        where: { id: req.params.id }
+    })
+    if (deletedAmount === 0) {
         return res.status(404).send({ error: "Barber not found" })
     }
     res.status(204).send()
