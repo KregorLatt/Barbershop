@@ -13,9 +13,9 @@ exports.getById = (id) => {
     return data.find((thing) => thing.id = parseInt(id))
 }
 
-exports.create = (newVenue) => {
+exports.create = (newBarber) => {
     const newId = Math.max(...data.map((thing) => thing.id) + 1)
-    newVenue.id = newId
-    data.push(newVenue)
-    return newVenue
+    newBarber.id = newId
+    data.push(newBarber)
+    return newBarber
 }
