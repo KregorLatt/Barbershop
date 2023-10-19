@@ -4,7 +4,71 @@ info:
     version: 1.0.0
     description: '### This is a Swagger UI for our games API'
 paths:
-    /Barbers:
+    '/barbers/{id}':
+        get:
+            tags:
+                - details
+            parameters:
+                -
+                    examples:
+                        Id:
+                            value:
+                                id: 1
+                    name: id
+                    description: Barber id
+                    schema:
+                        type: array
+                        items:
+                            type: string
+                    in: path
+                    required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                Full details of a given barber:
+                                    value: '{"id":1, "name":"Kaire","Contact_Details":"Kaire@gmail.com"'
+                    description: |
+                        Returns full details of a given id barber
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                Barber /w+ was not found:
+                                    value: Game\\w+ was not found in barber array
+                    description: Barber was not in barbers array
+            operationId: Barber id
+            summary: Get full details of barber
+            description: |
+                Returns full details of a given id barber
+        delete:
+            requestBody:
+                description: Delete-barber
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/delete-barber'
+                required: true
+            tags:
+                - Delete
+            responses:
+                '204':
+                    description: Deleted barber
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                    description: Barber was not deleted
+            summary: Delete full details of barber
+            description: |
+                Deletes full details of a given id barber
+    /barbers:
         get:
             tags:
                 - barbers
@@ -23,7 +87,31 @@ paths:
                         Returns a list of barbers
             summary: Get a list of all barbers
             description: Returns a list of all barbers in API
-    /Services:
+        post:
+            requestBody:
+                description: A new barber to be created
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/new-barber'
+                        examples:
+                            example:
+                                value:
+                                    contact_details: 86.76
+                                    name: Juuri
+                required: true
+            tags:
+                - barbers
+            responses:
+                '201':
+                    description: New barber has been created
+                '400':
+                    description: One or all params are missing
+            deprecated: false
+            summary: creates a barber
+            description: |
+                Post a new barber
+    /services:
         get:
             tags:
                 - services
@@ -48,7 +136,7 @@ paths:
                     description: Returns a list of all services in API
             summary: Get a list of all Services
             description: Returns a list of all services in API
-    '/Services/{id}':
+    '/services/{id}':
         get:
             tags:
                 - details
@@ -100,61 +188,6 @@ paths:
                 name: id
                 in: path
                 required: true
-    '/barbers/{id}':
-        get:
-            tags:
-                - details
-            parameters:
-                -
-                    examples:
-                        Id:
-                            value:
-                                id: 1
-                    name: id
-                    description: Barber id
-                    schema:
-                        type: array
-                        items:
-                            type: string
-                    in: path
-                    required: true
-            responses:
-                '200':
-                    content:
-                        application/json:
-                            schema:
-                                type: string
-                            examples:
-                                Full details of a given barber:
-                                    value: '{"id":1, "name":"Kaire","Contact_Details":"Kaire@gmail.com"'
-                    description: |
-                        Returns full details of a given id barber
-                '404':
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
-                            examples:
-                                Barber /w+ was not found:
-                                    value: Game\\w+ was not found in barber array
-                    description: Barber was not in barbers array
-            operationId: Barber id
-            summary: Get full details of barber
-            description: |
-                Returns full details of a given id barber
-        delete:
-            tags:
-                - Delete
-            responses:
-                '404':
-                    content:
-                        application/json:
-                            schema:
-                                type: string
-                    description: Barber was not deleted
-            summary: Delete full details of barber
-            description: |
-                Deletes full details of a given id barber
 components:
     schemas:
         error:
@@ -177,3 +210,14 @@ components:
                     type: string
             example:
                 id: 1
+        new-barber:
+            description: ''
+            type: object
+            properties:
+                contact_details:
+                    format: float
+                    description: ''
+                    type: number
+                name:
+                    description: ''
+                    type: string
