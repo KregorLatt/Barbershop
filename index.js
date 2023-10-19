@@ -1,9 +1,10 @@
-const express = require ('express')()
+require("dotenv").config()
+const express = require("express")
 const app = express()
-const port =8080
+const port = process.env.PORT
 const swaggerui = require("swagger-ui-express")
-const swaggerDocument = require("./docs/swagger.json");
 const yamljs = require("yamljs")
+
 const swaggerDocument=yamljs.load("./docs/swagger.yaml");
 const services = require("./services/data")
 app.use(express.json())
@@ -64,18 +65,22 @@ const barbers = [
    
 ]
 
-app.get("/barbers", (req, res) => {
-    res.send (barbers)
-})
 
-app.get("/barbers/:id" , (req, res) => {
-    res.send(barbers[req.params.id])
-})
 
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+
+app.use(express.json())
+app.use("/docs", swaggerui.serve, swaggerui.setup(swaggerDocument))
+
+require("./routes/barberRoutes")(app)
+
+
 
 app.listen(port, () => {
+    require("./db").sync()
+        .then(console.log("Synchronized"))
+        .catch((error) => console.log("Error:", error))
     console.log(`API up at: http://localhost:${port}`);
+
 })
 
 app.post("/barbers", (req, res) => {
@@ -97,10 +102,14 @@ function getBaseurl (request){
  CreateService
 }
 
-}
-main
+})
 
 app.listen(port, () => {
     console.log(`API up at: http://localhost:${port}`);
+
+
 })
+
+
  main
+
