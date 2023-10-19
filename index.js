@@ -5,10 +5,20 @@ const swaggerui = require("swagger-ui-express")
 const swaggerDocument = require("./docs/swagger.json");
 const yamljs = require("yamljs")
 const swaggerDocument=yamljs.load("./docs/swagger.yaml");
-const barbers = require("./Barbers/data")
+const services = require("./services/data")
 app.use(express.json())
 app.use("/docs", swaggerui.serve, swaggerui.setup(swaggerDocument))
 
+ GetServiceDetails
+app.get("/services", (req, res) => {
+    res.send(services.getAll())
+})
+
+app.get("/services/:id" , (req, res) => {
+    res.send(services.getById(req.params.id))
+})
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 const barbers = [
     {id:1,name:"Kaire",Contact_details:"Kaire@gmail.com"},
     {id:2,name:"Maire",Contact_details:"Maire@gmail.com"},
@@ -47,7 +57,9 @@ function getBaseurl (request){
     return (request.connection && request.connection.encrypted ? "https" : "http") 
             + "://" + request.headers.host
 }
+main
 
 
-
-
+app.listen(port, () => {
+    console.log(`API up at: http://localhost:${port}`);
+})
