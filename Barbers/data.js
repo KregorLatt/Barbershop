@@ -19,3 +19,12 @@ exports.create = (newBarber) => {
     data.push(newBarber)
     return newBarber
 }
+
+exports.delete = (id) => {
+    var toBeDeleted = this.getById(id)
+    if (toBeDeleted === undefined) {
+        return
+    }
+    data = data.filter((e) => toBeDeleted.id != e.id)
+    return toBeDeleted
+}

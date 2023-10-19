@@ -1,6 +1,6 @@
 const barbersController = require("../controllers/BarbersController.js")
 module.exports = (app) => {
-    app.route("/gaeventsmes")
+    app.route("/barbers")
         .get(barbersController.getAll)
         .post(barbersController.createNew)      // Create
     app.route("/barbers/:id")
