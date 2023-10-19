@@ -17,8 +17,8 @@ try {
 const db = {}
 db.Sequelize = Sequelize
 db.connection = sequelize
-db.games = require("./models/Game")(sequelize, Sequelize)
-db.players = require("./models/Player")(sequelize, Sequelize)
+db.barbers = require("./models/Barber")(sequelize, Sequelize)
+
 
 sync = async () => {
     //await sequelize.sync({ force: true }) // Erase all and recreate
