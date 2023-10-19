@@ -10,6 +10,7 @@ module.exports = (dbConnection, Sequelize) => {
             allowNull: false
         }
         
+        
 
     })
     return Barber

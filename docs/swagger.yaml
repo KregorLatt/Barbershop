@@ -47,15 +47,13 @@ paths:
             description: |
                 Returns full details of a given id barber
         delete:
-            requestBody:
-                description: Delete-barber
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/delete-barber'
-                required: true
             tags:
                 - Delete
+            parameters:
+                -
+                    name: id
+                    in: path
+                    required: true
             responses:
                 '204':
                     description: Deleted barber
@@ -98,7 +96,7 @@ paths:
                             example:
                                 value:
                                     contact_details: 86.76
-                                    name: Juuri
+                                    name: Juuri2
                 required: true
             tags:
                 - barbers
