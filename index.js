@@ -102,15 +102,14 @@ function getBaseurl (request){
  CreateService
 }
 
-}
-main
+})
 
 app.listen(port, () => {
     console.log(`API up at: http://localhost:${port}`);
-<<<<<<< HEAD
+
 
 })
-=======
-})
+
+
  main
->>>>>>> 55cc974bab092bbbc9ebc915208d3fcfe650d2b5
+
