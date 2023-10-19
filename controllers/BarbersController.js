@@ -1,4 +1,5 @@
-const venues = require("../Barbers/data")
+const { db } = require("../db")
+const barbers =db.barbers
 const { getBaseurl } = require("./helpers")
 
 // CREATE
@@ -14,8 +15,9 @@ exports.createNew = (req, res) => {
         .send(createdBarber)
 }
 // READ
-exports.getAll = (req, res) => {
-    res.send(barbers.getAll())
+exports.getAll = async (req, res) => {
+    const result = await barbers.findAll({ attributes: ["id", "name"] })
+    res.json(result)
 }
 exports.getById = (req, res) => {
     const foundBarber = barbers.getById(req.params.id)
