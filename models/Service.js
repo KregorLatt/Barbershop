@@ -12,7 +12,12 @@ module.exports = (dbConnection, Sequelize) => {
         Description: {
             type: Sequelize.STRING,
             allowNull: false
-        }
+        },
+        price:
+        {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
     })
     return Service
 }

@@ -8,6 +8,10 @@ module.exports = (dbConnection, Sequelize) => {
         name: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        contact_details: {
+            type: Sequelize.INTEGER,
+            allowNull: false
         }
         
         

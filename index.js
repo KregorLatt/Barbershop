@@ -11,7 +11,8 @@ app.use(express.json())
 app.use("/docs", swaggerui.serve, swaggerui.setup(swaggerDocument))
 
 require("./routes/barberRoutes")(app)
-
+require("./routes/serviceRoutes")(app)
+require("./routes/barberServiceRoutes")(app)
 
 
 app.listen(port, () => {
