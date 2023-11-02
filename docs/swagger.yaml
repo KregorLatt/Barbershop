@@ -11,15 +11,12 @@ paths:
             parameters:
                 -
                     examples:
-                        Id:
-                            value:
-                                id: 1
+                        small:
+                            value: '6'
                     name: id
                     description: Barber id
                     schema:
-                        type: array
-                        items:
-                            type: string
+                        type: number
                     in: path
                     required: true
             responses:
@@ -27,7 +24,9 @@ paths:
                     content:
                         application/json:
                             schema:
-                                type: string
+                                type: array
+                                items:
+                                    type: string
                             examples:
                                 Full details of a given barber:
                                     value: '{"id":1, "name":"Kaire","Contact_Details":"Kaire@gmail.com"'
@@ -40,28 +39,91 @@ paths:
                                 $ref: '#/components/schemas/error'
                             examples:
                                 Barber /w+ was not found:
-                                    value: Game\\w+ was not found in barber array
+                                    value: "\t{\"error\":\"Barber not found\"}"
                     description: Barber was not in barbers array
             operationId: Barber id
             summary: Get full details of barber
             description: |
                 Returns full details of a given id barber
+        put:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                type: string
+                        examples:
+                            Update barber:
+                                value:
+                                    contact_details: 8
+                                    name: some text
+                required: true
+            tags:
+                - barbers
+            parameters:
+                -
+                    examples:
+                        small:
+                            value: '8'
+                    name: id
+                    description: Identificator for the barber
+                    schema:
+                        type: number
+                    in: path
+                    required: true
+            responses:
+                '204':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                Example:
+                                    value:
+                                        - Maire
+                                        - Kalle
+                    description: |
+                        Succeeded
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                error:
+                                    value:
+                                        error: Barber not found
+                    description: |
+                        Barber not found
+            summary: Add full details of a barbers
+            description: Adds full detail of a given barber id.
         delete:
             tags:
                 - Delete
             parameters:
                 -
+                    examples:
+                        small:
+                            value: '7'
                     name: id
+                    description: |
+                        Identificator for the barber
+                    schema:
+                        type: number
                     in: path
                     required: true
             responses:
                 '204':
-                    description: Deleted barber
+                    description: Succeeded
                 '404':
                     content:
                         application/json:
                             schema:
                                 type: string
+                            examples:
+                                error:
+                                    value: "\t{\"error\":\"Barber not found\"}"
                     description: Barber was not deleted
             summary: Delete full details of barber
             description: |
@@ -95,8 +157,8 @@ paths:
                         examples:
                             example:
                                 value:
-                                    contact_details: 86.76
-                                    name: Juuri2
+                                    contact_details: 30.08
+                                    name: some text
                 required: true
             tags:
                 - barbers
@@ -122,18 +184,65 @@ paths:
                                 items:
                                     type: string
                             examples:
-                                List of services:
-                                    value: |-
-                                        [
-                                            "Men cut"
-                                            "Women cut"
-                                            "Hair coloring"
-
-                                            
-                                        ]
+                                service:
+                                    value: "\t{\"id\":1,\"service_name\":\"Meestelõikus\",\"price\":\"5\",\"description\":\"Masinlõikus\"}"
                     description: Returns a list of all services in API
             summary: Get a list of all Services
             description: Returns a list of all services in API
+        post:
+            requestBody:
+                description: A new service to be created
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                type: string
+                        examples:
+                            service:
+                                value:
+                                    service_name: Meestelõikus
+                                    price: '5'
+                                    description: Masinlõikus
+                required: true
+            tags:
+                - services
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                            examples:
+                                Created service:
+                                    value: "\t{\"id\":1,\"service_name\":\"Meestelõikus\",\"price\":\"5\",\"description\":\"Masinlõikus\"}"
+                    description: New service has been created
+                '201':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                            examples:
+                                Created:
+                                    value: '[ "Men cut" "Women cut" "Hair coloring" ]'
+                    description: New service has been created
+                '400':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                error:
+                                    value:
+                                        error: Service not found
+                    description: One or all params are missing
+            summary: creates a service
+            description: |
+                Post a new barber
     '/services/{id}':
         get:
             tags:
@@ -141,15 +250,12 @@ paths:
             parameters:
                 -
                     examples:
-                        Service id:
-                            value:
-                                id: 1
+                        small:
+                            value: '6'
                     name: id
                     description: Service id
                     schema:
-                        type: array
-                        items:
-                            type: string
+                        type: number
                     in: path
                     required: true
             responses:
@@ -157,14 +263,16 @@ paths:
                     content:
                         application/json:
                             schema:
-                                type: string
+                                type: array
+                                items:
+                                    type: string
                             examples:
                                 Full details of given services:
                                     value:
                                         id: 1
-                                        Service_name: Meestelõikus
-                                        Price: 5$
-                                        Description: Masinlõikus
+                                        service_name: Meestelõikus
+                                        price: '5'
+                                        description: Masinlõikus
                     description: |
                         Returns full details of a given id service
                 '404':
@@ -181,6 +289,102 @@ paths:
             summary: Get full details of service
             description: |
                 Returns full details of a given id service
+        put:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                type: string
+                        examples:
+                            new service:
+                                value:
+                                    id: 1
+                                    Service_name: Meestelõikus
+                                    price: '5'
+                                    Description: Masinlõikus
+                required: true
+            tags:
+                - services
+            parameters:
+                -
+                    examples:
+                        small:
+                            value: '5'
+                    name: id
+                    description: Identificator for the service
+                    schema:
+                        type: number
+                    in: path
+                    required: true
+            responses:
+                '202':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                            examples:
+                                Accepted:
+                                    value: "\t{\"id\":1,\"service_name\":\"Meestelõikus\",\"price\":\"5\",\"description\":\"Masinlõikus\"}"
+                    description: Accepted
+                '204':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                            examples:
+                                Service:
+                                    value:
+                                        id: 1
+                                        Service_name: Meestelõikus
+                                        price: '5'
+                                        Description: Masinlõikus
+                    description: Succeeded
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                error:
+                                    value:
+                                        error: service not found
+                    description: Service not found
+            summary: Add full details of a services
+        delete:
+            tags:
+                - services
+            parameters:
+                -
+                    examples:
+                        small:
+                            value: '5'
+                    name: id
+                    description: Identificator for the service
+                    schema:
+                        type: number
+                    in: path
+                    required: true
+            responses:
+                '204':
+                    description: Succeeded
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                error:
+                                    value:
+                                        error: service not found
+                    description: Service not found
+            summary: Deletes service
+            description: Deletes service with given id
         parameters:
             -
                 name: id
@@ -217,5 +421,23 @@ components:
                     description: ''
                     type: number
                 name:
+                    description: ''
+                    type: string
+        new-service:
+            description: ''
+            required:
+                - Service_name
+                - Price
+                - Description
+            type: object
+            properties:
+                Service_name:
+                    description: ''
+                    type: string
+                Price:
+                    format: float
+                    description: ''
+                    type: number
+                Description:
                     description: ''
                     type: string

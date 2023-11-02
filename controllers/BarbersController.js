@@ -4,7 +4,7 @@ const { getBaseurl } = require("./helpers")
 
 // CREATE
 exports.createNew = async (req, res) => {
-    if (!req.body.name || !req.body.price) {
+    if (!req.body.name || !req.body.contact_details) {
         return res.status(400).send({ error: "One or all required parameters are missing" })
     }
     const createdBarber = await barbers.create(req.body, {
@@ -28,6 +28,8 @@ exports.getById = async (req, res) => {
 }
 // UPDATE
 exports.editById = async (req, res) => {
+    console.log(req.body)
+    console.log(req.params)
     const updateResult = await barbers.update({ ...req.body }, {
         where: { id: req.params.id },
         fields: ["name", "Contact_details"]

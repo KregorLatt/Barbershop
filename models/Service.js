@@ -5,17 +5,17 @@ module.exports = (dbConnection, Sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        Service_name: {
+        service_name: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        Description: {
+        description: {
             type: Sequelize.STRING,
             allowNull: false
         },
         price:
         {
-            type: Sequelize.INTEGER,
+            type: Sequelize.DOUBLE,
             allowNull: false
         },
     })
