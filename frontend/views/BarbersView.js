@@ -1,23 +1,23 @@
-import barberList from "./components/BarberList.js"
-import barberInfoModal from "./components/BarberInfoModal.js"
+import barbersList from "../components/BarbersList.js"
+import barberInfoModal from "../components/BarberInfoModal.js"
 export default {
     /*html*/
     template: `
-    <barber-list :key="update" @showModal="openModal"></barber-list>
+    <barbers-list :key="update" @showModal="openModal"></barbers-list>
     <barber-info-modal @barberUpdated="updateView" :barberInModal="barberInModal"></barber-info-modal>
     `,
     components: {
-        barberList,
+        barbersList,
         barberInfoModal
     },
     data() {
         return {
             update: 0,
-            barberInModal: { id: "", name: "", contact_details: ""}
+            barberInModal: { id: "", name: "", contact_details: "" }
         }
     },
     methods: {
-        openModal(barber){
+        openModal(barber) {
             this.barberInModal = barber
             let barberInfoModal = new bootstrap.Modal(document.getElementById("barberInfoModal"))
             barberInfoModal.show()

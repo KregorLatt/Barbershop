@@ -70,7 +70,9 @@ sync = async () => {
         console.log("barberService created: ", createdBS)
     }
     else {
+        console.log("Begin ALTER")
         await db.connection.sync({ alter: true }) // Alter existing to match the model
+        onsole.log('Database synchronised.')
     }
 }
 
