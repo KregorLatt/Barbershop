@@ -17,6 +17,7 @@ require("./routes/barberRoutes")(app)
 require("./routes/serviceRoutes")(app)
 require("./routes/barberServiceRoutes")(app)
 require("./routes/appointmentRoutes")(app)
+require("./routes/customerRoutes")(app)
 
 
 app.listen(port, async () => {
