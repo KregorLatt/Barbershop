@@ -16,6 +16,7 @@ app.use("/docs", swaggerui.serve, swaggerui.setup(swaggerDocument))
 require("./routes/barberRoutes")(app)
 require("./routes/serviceRoutes")(app)
 require("./routes/barberServiceRoutes")(app)
+require("./routes/appointmentRoutes")(app)
 
 
 app.listen(port, async () => {
