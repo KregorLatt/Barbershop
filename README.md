@@ -7,9 +7,9 @@ Turvalised kliendiandmed: salvestage turvaliselt klienditeavet, sealhulgas kohtu
 Meie juuksurisalongi  API abil saate jätta hüvasti ajakavade koostamisega seotud raskuste ja kliendihaldus probleemidega. Soovime Suurendada salongi tõhusust ja pakkuda suurepärast kliendikogemust.
 
 
-#How to Run the Project
-1.Open the Node.js command prompt.
-3.Clone the repository.
-4.Run npm install.
-5.Rename .env.example to .env and add the necessary parameters for your database.
-6.Type node . into the Node.js command prompt
+How to Run the Project
+1. Open the Node.js command prompt.
+2. Clone the repository.
+3. Run npm install dotenv.
+4. Rename .env.example to .env and add the necessary parameters for your database.
+5. Type node . into the Node.js command prompt
