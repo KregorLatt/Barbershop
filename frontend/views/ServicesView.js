@@ -1,5 +1,5 @@
-import servicesList from "../components/ServicesList.js"
-import servicesInfoModal from "../components/ServiceInfoModal.js"
+import servicesList from "../components/Service/ServicesList.js"
+import servicesInfoModal from "../components/Service/ServiceInfoModal.js"
 export default {
     /*html*/
     template: `

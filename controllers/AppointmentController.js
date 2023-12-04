@@ -1,4 +1,4 @@
-const { db } = require("../db")
+const { db } = require("../db.js")
 const appointments = db.appointmentsCreate
 const { getBaseurl } = require("./helpers.js")
 //Create
