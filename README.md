@@ -7,7 +7,7 @@ Turvalised kliendiandmed: salvestage turvaliselt klienditeavet, sealhulgas kohtu
 Meie juuksurisalongi  API abil saate jätta hüvasti ajakavade koostamisega seotud raskuste ja kliendihaldus probleemidega. Soovime Suurendada salongi tõhusust ja pakkuda suurepärast kliendikogemust.
 
 
-1.How to Run the Project
+#How to Run the Project
 2.Open the Node.js command prompt.
 3.Clone the repository.
 4.Run npm install.
