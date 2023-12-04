@@ -70,6 +70,20 @@ export default {
             console.log(rawResponse);
             this.$emit("barberUpdated", this.modifiedBarber)
             this.isEditing = false
+        },
+        async deleteBarber() {
+            console.log("Deleting:", this.modifiedBarber);
+            const rawResponse = await fetch(this.API_URL + "/barberss/" + this.modifiedBarber.id, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.modifiedBarber)
+            });
+            console.log(rawResponse);
+            this.$emit("barberUpdated", this.modifiedBarber)
+            this.isEditing = false
         }
     }
-}
+    }

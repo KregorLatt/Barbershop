@@ -48,7 +48,7 @@ export default {
                                    <button type="button" class="btn btn-danger" data-bs-target="#confirmationModal" data-bs-toggle="modal">Delete</button>
                                </div>
                                <div class="col-auto">
-                                   <button type="button" class="btn btn-success mx-2" @click="saveModifiedCar">Save</button>
+                                   <button type="button" class="btn btn-success mx-2" @click="saveModifiedAppointment">Save</button>
                                    <button type="button" class="btn btn-secondary" @click="cancelEditing">Cancel</button>
                                </div>
                            </template>
@@ -102,8 +102,19 @@ methods: {
         this.$emit("appointmentUpdated", this.modifiedAppointment)
         this.isEditing = false
     },
-    deleteAppointment(){
-        console.log("DELETE confirmed");
+    async deleteAppointment() {
+        console.log("Deleting:", this.modifiedAppointment);
+        const rawResponse = await fetch(this.API_URL + "/appointments/" + this.modifiedAppointment.id, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.modifiedAppointment)
+        });
+        console.log(rawResponse);
+        this.$emit("appointmentUpdated", this.modifiedAppointment)
+        this.isEditing = false
     }
 }
 }

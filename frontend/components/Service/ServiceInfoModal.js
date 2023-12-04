@@ -65,6 +65,20 @@ export default {
             console.log(rawResponse);
             this.$emit("serviceUpdated", this.modifiedService)
             this.isEditing = false
+        },
+        async deleteService() {
+            console.log("Deleting:", this.modifiedService);
+            const rawResponse = await fetch(this.API_URL + "/services/" + this.modifiedService.id, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.modifiedService)
+            });
+                console.log(rawResponse);
+                this.$emit("serviceUpdated", this.modifiedService)
+                this.isEditing = false
         }
     }
 }
