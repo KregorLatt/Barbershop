@@ -1,10 +1,10 @@
-const ServicesController = require("../controllers/ServicesController.js")
+const servicesController = require("../controllers/ServicesController.js")
 module.exports = (app) => {
     app.route("/services")
-        .get(ServicesController.getAll)
-        .post(ServicesController.createNew)      // Create
+        .get(servicesController.getAll)
+        .post(servicesController.createNew)      // Create
     app.route("/services/:id")
-        .get(ServicesController.getById)         // Read
-        .put(ServicesController.editById)        // Update
-        .delete(ServicesController.deleteById)   // Delete
+        .get(servicesController.getById)         // Read
+        .put(servicesController.editById)        // Update
+        .delete(servicesController.deleteById)   // Delete
 }

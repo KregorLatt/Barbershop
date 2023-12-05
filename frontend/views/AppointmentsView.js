@@ -1,5 +1,5 @@
-import carList from "../components/Appointment/AppointmentList.js"
-import carInfoModal from "../components/Appointment/AppointmentInfoModal.js"
+import appointmentList from "../components/Appointment/AppointmentsList.js"
+import appointmentInfoModal from "../components/Appointment/AppointmentInfoModal.js"
 export default {
     /*html*/
     template: `

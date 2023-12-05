@@ -6,10 +6,13 @@ export default {
             <th>Name</th>
             <th>Contact_Details</th>
         </tr>
+        </thead>
+        <tbody>
         <tr v-for="barber in barbers">
             <td @click="getBarber(barber.id)">{{ barber.name }}</td>
             <td>{{ barber.contact_details }}</td>
         </tr>
+        </tbody>
     </table>
     `,
     emits: ["showModal"],

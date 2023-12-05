@@ -9,8 +9,8 @@ import CustomersView from './views/CustomersView.js'
 
 
 const routes = [
-    { path: "/barbers", component: BarbersViewView },
-    { path: "/services", component: ServicesViewView },
+    { path: "/barbers", component: BarbersView },
+    { path: "/services", component: ServicesView },
     { path: "/appointments", component: AppointmentsView },
     { path: "/customers", component: CustomersView }
 ]

@@ -1,10 +1,10 @@
-const gamePlayController = require("../controllers/BarberServiceController.js")
+const barberServiceController = require("../controllers/BarberServiceController.js")
 module.exports = (app) => {
     app.route("/barberservice")
-        .get(gamePlayController.getAll)
-        .post(gamePlayController.createNew)      // Create
+        .get(barberServiceController.getAll)
+        .post(barberServiceController.createNew)      // Create
     app.route("/barberservice/:id")
-        .get(gamePlayController.getById)         // Read
-        .put(gamePlayController.editById)        // Update
-        .delete(gamePlayController.deleteById)   // Delete
+        .get(barberServiceController.getById)         // Read
+        .put(barberServiceController.editById)        // Update
+        .delete(barberServiceController.deleteById)   // Delete
 }

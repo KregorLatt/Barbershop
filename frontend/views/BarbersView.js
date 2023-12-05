@@ -1,4 +1,4 @@
-import barbersList from "../components/BarbersList.js"
+import barbersList from "../components/Barber/BarbersList.js"
 import barberInfoModal from "../components/Barber/BarberInfoModal.js"
 export default {
     /*html*/

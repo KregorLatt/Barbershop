@@ -29,7 +29,7 @@ db.barberServices.belongsTo(db.barbers)
 db.barberServices.belongsTo(db.services)
 
 sync = async () => {
-    if (process.env.DROP_DB) {
+    if (process.env.DROP_DB === "true") {
         console.log("Begin DROP")
         await db.connection.query('SET FOREIGN_KEY_CHECKS = 0')
         console.log("Checks disabled")
@@ -50,10 +50,10 @@ sync = async () => {
         console.log("barber created: ", createdB)
         const [service, createdS] = await db.services.findOrCreate({
             where: {
-                Service_name: "Meesteloikus"
+                service_name: "Meesteloikus"
             },
             defaults: {
-                Service_name: "Meesteloikus"
+                service_name: "Meesteloikus"
             }
         })
         console.log("service created: ", createdS)
@@ -72,7 +72,7 @@ sync = async () => {
     else {
         console.log("Begin ALTER")
         await db.connection.sync({ alter: true }) // Alter existing to match the model
-        onsole.log('Database synchronised.')
+        console.log('Database synchronised.')
     }
 }
 

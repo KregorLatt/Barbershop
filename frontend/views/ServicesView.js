@@ -1,5 +1,5 @@
 import servicesList from "../components/Service/ServicesList.js"
-import servicesInfoModal from "../components/Service/ServiceInfoModal.js"
+import serviceInfoModal from "../components/Service/ServiceInfoModal.js"
 export default {
     /*html*/
     template: `
@@ -13,18 +13,18 @@ export default {
     data() {
         return {
             update: 0,
-            serviceInModal: { id: "", name: "" , price: "" , description:""}
+            serviceInfoModal: { id: "", name: "" , price: "" , description:""}
         }
     },
     methods: {
         openModal(service) {
-            this.serviceInModal = service
+            this.serviceInfoModal = service
             let serviceInfoModal = new bootstrap.Modal(document.getElementById("serviceInfoModal"))
             serviceInfoModal.show()
         },
         updateView(service) {
             this.update++
-            this.serviceInModal = service
+            this.serviceInfoModal = service
         }
     }
 }

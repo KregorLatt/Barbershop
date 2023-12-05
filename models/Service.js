@@ -7,16 +7,17 @@ module.exports = (dbConnection, Sequelize) => {
         },
         service_name: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         description: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         price:
         {
             type: Sequelize.DOUBLE,
-            allowNull: false
+            allowNull: true
+
         },
     })
     return Service

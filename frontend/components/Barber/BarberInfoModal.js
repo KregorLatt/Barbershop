@@ -1,4 +1,7 @@
+import confirmationModal from "../ConfirmationModal.js"
 export default {
+    
+
     /*html*/
     template: `
 <div id="barberInfoModal" class="modal" tabindex="-1">
@@ -39,6 +42,9 @@ export default {
     </div>
 </div>
     `,
+    components: {
+        confirmationModal
+    },
     emits: ["barberUpdated"],
     props: {
         barberInModal: {}
@@ -59,7 +65,7 @@ export default {
         },
         async saveModifiedBarber() {
             console.log("Saving:", this.modifiedBarber)
-            const rawResponse = await fetch(this.API_URL + "/barberss/" + this.modifiedBarber.id, {
+            const rawResponse = await fetch(this.API_URL + "/barbers/" + this.modifiedBarber.id, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -73,7 +79,7 @@ export default {
         },
         async deleteBarber() {
             console.log("Deleting:", this.modifiedBarber);
-            const rawResponse = await fetch(this.API_URL + "/barberss/" + this.modifiedBarber.id, {
+            const rawResponse = await fetch(this.API_URL + "/barbers/" + this.modifiedBarber.id, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',

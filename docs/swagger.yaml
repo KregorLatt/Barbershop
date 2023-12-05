@@ -390,6 +390,164 @@ paths:
                 name: id
                 in: path
                 required: true
+    /customer:
+        get:
+            tags:
+                - Customers
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                List of customers:
+                                    value:
+                                        - Maire
+                                        - Kalle
+                    description: Returns a list of customers
+            summary: Get a list of all customers
+            description: Returns a list of all barbers in API
+        post:
+            requestBody:
+                description: A new customer to be created
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/new-customer'
+                        examples:
+                            new-customer:
+                                value:
+                                    name: some text
+                                    contact_details: 30.08
+                required: true
+            tags:
+                - customers
+            responses:
+                '201':
+                    description: New customer has been created
+                '400':
+                    description: One or all params are missing
+            summary: creates a customer
+            description: post new customer
+    '/customer/{id}':
+        get:
+            tags:
+                - details
+            parameters:
+                -
+                    examples:
+                        small:
+                            value: '7'
+                    name: id
+                    description: |
+                        Customer id
+                    schema:
+                        type: number
+                    in: path
+                    required: true
+            responses:
+                '200':
+                    description: Returns full details of a given id barber
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                not found:
+                                    value:
+                                        error: Customer not found
+                    description: Customer was not in customers array
+            description: Returns full details of a given id customer
+        put:
+            tags:
+                - Customers
+            parameters:
+                -
+                    examples:
+                        small:
+                            value: '6'
+                    name: id
+                    description: Identificator for the customer
+                    schema:
+                        type: number
+                    in: path
+                    required: true
+            responses:
+                '204':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                Example:
+                                    value:
+                                        - Maire
+                                        - Kalle
+                    description: Succeeded
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                error:
+                                    value:
+                                        error: Customer not found
+                    description: |
+                        Customer not found
+            summary: Add full details of a customers
+            description: Adds full detail of a given customer id.
+        delete:
+            tags:
+                - Delete
+            parameters:
+                -
+                    examples:
+                        small:
+                            value: '7'
+                    name: id
+                    description: Delete full details of customer
+                    schema:
+                        type: number
+                    in: path
+                    required: true
+            responses:
+                '204':
+                    description: "\r\nSucceeded"
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                error:
+                                    value:
+                                        error: Customer not found
+                    description: Customer was not deleted
+            summary: Delete full details of customer
+            description: Deletes full details of a given id customer
+        parameters:
+            -
+                name: id
+                in: path
+                required: true
+    /appointment:
+        get:
+            tags:
+                - appointments
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items: {}
+                    description: Retutns a list of appointments
+            summary: Get a list of all appointment
+            description: Returns a list of all appointments in API
+    '/appointment/{id}': {}
 components:
     schemas:
         error:
@@ -441,3 +599,14 @@ components:
                 Description:
                     description: ''
                     type: string
+        new-customer:
+            description: ''
+            type: object
+            properties:
+                name:
+                    description: ''
+                    type: string
+                contact_details:
+                    format: float
+                    description: ''
+                    type: number
