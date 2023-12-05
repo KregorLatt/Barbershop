@@ -1,4 +1,6 @@
 import confirmationModal from "../ConfirmationModal.js"
+import barberForm from "./barber/BarberForm.js"
+import barberDetails from "./barber/BarberDetails.js"
 export default {
     
 
@@ -8,42 +10,43 @@ export default {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Id</th>
-                        <td>{{barberInModal.id}}</td>
-                    </tr>
-                    <tr>
-                        <th>Name</th>
-                        <td v-if="isEditing"><input v-model="modifiedBarber.name"></td>
-                        <td v-else>{{barberInModal.name}}</td>
-                    </tr>
-                    <tr>
-                        <th>Contact_details</th>
-                        <td v-if="isEditing"><input v-model="modifiedBarber.contact_details"></td>
-                        <td v-else>{{barberInModal.price}}</td>
-                    </tr>
-                </table>
+                <barber-form v-if="isEditing" v-model:id="modifiedBarber.id" v-model:name="modifiedBarber.name" v-model:price="modifiedBarber.price" ></barber-form>
+                <barber-details v-else :barberInModal="barberInModal"></barber-details>
             </div>
             <div class="modal-footer">
-                <template v-if="isEditing">
-                    <button type="button" class="btn btn-success" @click="saveModifiedBarber">Save</button>
-                    <button type="button" class="btn btn-secondary" @click="cancelEditing">Cancel</button>
-                </template>
-                <template v-else>
-                    <button type="button" class="btn btn-warning" @click="startEditing">Edit</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </template>
+                <div class="container">
+                    <div class="row">
+                        <template v-if="isEditing">
+                            <div class="col me-auto">
+                                <button type="button" class="btn btn-danger" data-bs-target="#confirmationModal" data-bs-toggle="modal">Delete</button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-success mx-2" @click="saveModifiedBarber">Save</button>
+                                <button type="button" class="btn btn-secondary" @click="cancelEditing">Cancel</button>
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div class="col me-auto"></div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-warning mx-2" @click="startEditing">Edit</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<confirmation-modal :target="'#barberInfoModal'" @confirmed="deleteBarber"></confirmation-modal>
     `,
     components: {
-        confirmationModal
+        confirmationModal,
+        barberForm,
+        barberDetails
     },
     emits: ["barberUpdated"],
     props: {
@@ -77,19 +80,8 @@ export default {
             this.$emit("barberUpdated", this.modifiedBarber)
             this.isEditing = false
         },
-        async deleteBarber() {
-            console.log("Deleting:", this.modifiedBarber);
-            const rawResponse = await fetch(this.API_URL + "/barbers/" + this.modifiedBarber.id, {
-                method: 'DELETE',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.modifiedBarber)
-            });
-            console.log(rawResponse);
-            this.$emit("barberUpdated", this.modifiedBarber)
-            this.isEditing = false
+        deleteBarber() {
+            console.log("DELETE confirmed");
         }
     }
     }
