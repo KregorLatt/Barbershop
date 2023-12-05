@@ -50,10 +50,12 @@ sync = async () => {
         console.log("barber created: ", createdB)
         const [service, createdS] = await db.services.findOrCreate({
             where: {
-                service_name: "Meesteloikus"
+                service_name: "Meesteloikus",
+                
             },
             defaults: {
-                service_name: "Meesteloikus"
+                service_name: "Meesteloikus",
+                
             }
         })
         console.log("service created: ", createdS)

@@ -13,7 +13,7 @@ export default {
     data() {
         return {
             update: 0,
-            serviceInfoModal: { id: "", name: "" , price: "" , description:""}
+            serviceInModal: { id: "", name: "" , price: "" , description:""}
         }
     },
     methods: {

@@ -30,8 +30,9 @@ paths:
                             examples:
                                 Full details of a given barber:
                                     value:
+                                        id: 3
                                         name: JuuksurRisto3
-                                        Contact_Details: JuuksurRisto3@gmail.com
+                                        contact_Details: JuuksurRisto3@gmail.com
                     description: |
                         Returns full details of a given id barber
                 '404':
@@ -81,10 +82,11 @@ paths:
                             schema:
                                 type: string
                             examples:
-                                Example:
+                                example:
                                     value:
-                                        name: JuuksurRisto6
-                                        Contact_Details: JuuksurRisto6@gmail.com
+                                        id: 3
+                                        name: JuuksurRisto3
+                                        contact_Details: JuuksurRisto3@gmail.com
                     description: |
                         Succeeded
                 '404':
@@ -143,8 +145,9 @@ paths:
                             examples:
                                 List of barbers:
                                     value:
+                                        id: 1
                                         name: JuuksurRisto
-                                        Contact_Details: JuuksurRisto@gmail.com
+                                        contact_Details: JuuksurRisto@gmail.com
                     description: |
                         Returns a list of barbers
             summary: Get a list of all barbers
@@ -159,8 +162,9 @@ paths:
                         examples:
                             example:
                                 value:
+                                    id: '1'
                                     name: JuuksurRisto2
-                                    Contact_Details: JuuksurRisto2@gmail.com
+                                    contact_Details: JuuksurRisto2@gmail.com
                 required: true
             tags:
                 - barbers

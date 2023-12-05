@@ -9,7 +9,7 @@ export default {
     <barbers-list :key="update" @showModal="openModal"></barbers-list>
     <barber-info-modal @barberUpdated="updateView" :barberInModal="barberInModal"></barber-info-modal>
     <new-object-modal id="newBarberModal" @save="saveNewBarber">
-        <barber-form v-model:name="barberInModal.name" v-model:price="barberInModal.price"></barber-form>
+        <barber-form v-model:name="barberInModal.name" v-model:contact_details="barberInModal.contact_details"></barber-form>
         <div class="alert alert-danger" role="alert" v-show="error">{{error}}</div>
     </new-object-modal>
     `,

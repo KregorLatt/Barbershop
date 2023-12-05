@@ -10,7 +10,7 @@ module.exports = (dbConnection, Sequelize) => {
             allowNull: false
         },
         contact_details: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
             allowNull: false
         }
         

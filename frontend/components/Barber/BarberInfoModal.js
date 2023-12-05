@@ -13,7 +13,7 @@ export default {
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <barber-form v-if="isEditing" v-model:id="modifiedBarber.id" v-model:name="modifiedBarber.name" v-model:price="modifiedBarber.price" ></barber-form>
+                <barber-form v-if="isEditing" v-model:id="modifiedBarber.id" v-model:name="modifiedBarber.name" v-model:contact_details="modifiedBarber.contact_details" ></barber-form>
                 <barber-details v-else :barberInModal="barberInModal"></barber-details>
             </div>
             <div class="modal-footer">
