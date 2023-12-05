@@ -18,6 +18,11 @@ export default {
                         <td v-if="isEditing"><input v-model="modifiedService.name"></td>
                         <td v-else>{{serviceInModal.name}}</td>
                     </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td v-if="isEditing"><input v-model="modifiedService.price"></td>
+                        <td v-else>{{serviceInModal.price}}</td>
+                    </tr>
                 </table>
             </div>
             <div class="modal-footer">
@@ -66,19 +71,8 @@ export default {
             this.$emit("serviceUpdated", this.modifiedService)
             this.isEditing = false
         },
-        async deleteService() {
-            console.log("Deleting:", this.modifiedService);
-            const rawResponse = await fetch(this.API_URL + "/services/" + this.modifiedService.id, {
-                method: 'DELETE',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.modifiedService)
-            });
-                console.log(rawResponse);
-                this.$emit("serviceUpdated", this.modifiedService)
-                this.isEditing = false
+        deleteService() {
+            console.log("DELETE confirmed");
         }
     }
-}
+    }

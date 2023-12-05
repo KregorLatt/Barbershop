@@ -79,19 +79,8 @@ export default {
             this.$emit("customerUpdated", this.modifiedcustomer)
             this.isEditing = false
         },
-        async deleteCustomer() {
-            console.log("Deleting:", this.modifiedCustomer);
-            const rawResponse = await fetch(this.API_URL + "/customers/" + this.modifiedCustomer.id, {
-                method: 'DELETE',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.modifiedCustomer)
-            });
-                console.log(rawResponse);
-                this.$emit("customerUpdated", this.modifiedCustomer)
-                this.isEditing = false
+        deleteCustomer() {
+            console.log("DELETE confirmed");
         }
     }
-}
+    }
