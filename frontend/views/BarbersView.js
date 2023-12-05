@@ -22,7 +22,9 @@ export default {
     data() {
         return {
             update: 0,
-            barberInModal: { id: "", name: "", contact_details: "" }
+            barberInModal: { id: "", name: "", contact_details: "" },
+            newBarberModal: {},
+            error: ""
         }
     },
     methods: {

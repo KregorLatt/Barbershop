@@ -22,7 +22,9 @@ export default {
     data() {
         return {
             update: 0,
-            serviceInModal: { id: "", name: "" , price: "" , description:""}
+            serviceInModal: { id: "", name: "" , price: "" , description:""},
+            newServiceModal: {},
+            error: ""
         }
     },
     methods: {

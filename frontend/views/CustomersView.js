@@ -22,7 +22,9 @@ export default {
     data() {
         return {
             update: 0,
-            customerInModal: { id: "", name:"",contact_details:""}
+            customerInModal: { id: "", name:"",contact_details:""},
+            newCustomerModal: {},
+            error: ""
             
         }
     },
