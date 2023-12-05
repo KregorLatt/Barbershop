@@ -24,6 +24,9 @@ export default {
     async created() {
         this.barbers = await (await fetch("http://localhost:8080/barbers")).json()
     },
+     // async beforeUpdate() {
+    //     this.barbers = await (await fetch("http://localhost:8080/barbers")).json()
+    // },
     methods: {
         getBarber: async function (id) {
             const barberInModal = await (await fetch(this.API_URL + "/barbers/" + id)).json()
