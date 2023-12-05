@@ -2,6 +2,7 @@ export default {
     /*html*/
     template: `
     <table id="barbersTable" class="table table-striped table-bordered">
+    <thead>
         <tr>
             <th>Name</th>
             <th>Contact_Details</th>

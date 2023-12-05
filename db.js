@@ -44,7 +44,7 @@ sync = async () => {
             },
             defaults: {
                 name: "Maire",
-                contact_details: 518318,
+                contact_details: "Maire@gmail.com",
             }
         })
         console.log("barber created: ", createdB)

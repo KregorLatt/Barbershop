@@ -8,6 +8,10 @@ export default {
     <button class="btn btn-secondary" @click="newBarber">New Barber</button>
     <barbers-list :key="update" @showModal="openModal"></barbers-list>
     <barber-info-modal @barberUpdated="updateView" :barberInModal="barberInModal"></barber-info-modal>
+    <new-object-modal id="newBarberModal" @save="saveNewBarber">
+        <barber-form v-model:name="barberInModal.name" v-model:price="barberInModal.price"></barber-form>
+        <div class="alert alert-danger" role="alert" v-show="error">{{error}}</div>
+    </new-object-modal>
     `,
     components: {
         barbersList,
@@ -30,7 +34,7 @@ export default {
         newBarber() {
             this.error = ""
             this.barberInModal = {}
-            this.newBarberModal = new bootstrap.Modal(document.getElementById("newGameModal"))
+            this.newBarberModal = new bootstrap.Modal(document.getElementById("newBarberModal"))
             this.newBarberModal.show()
         },
         updateView(barber) {

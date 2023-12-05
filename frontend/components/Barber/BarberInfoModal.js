@@ -1,6 +1,6 @@
 import confirmationModal from "../ConfirmationModal.js"
 import barberForm from "./BarberForm.js"
-import barberDetails from ".//BarberDetails.js"
+import barberDetails from "./BarberDetails.js"
 export default {
     
 
