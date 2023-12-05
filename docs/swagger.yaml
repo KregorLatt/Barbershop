@@ -29,7 +29,9 @@ paths:
                                     type: string
                             examples:
                                 Full details of a given barber:
-                                    value: '{"id":1, "name":"Kaire","Contact_Details":"Kaire@gmail.com"'
+                                    value:
+                                        name: JuuksurRisto3
+                                        Contact_Details: JuuksurRisto3@gmail.com
                     description: |
                         Returns full details of a given id barber
                 '404':
@@ -56,8 +58,8 @@ paths:
                         examples:
                             Update barber:
                                 value:
-                                    contact_details: 8
-                                    name: some text
+                                    name: JuuksurRisto5
+                                    Contact_Details: JuuksurRisto5@gmail.com
                 required: true
             tags:
                 - barbers
@@ -81,8 +83,8 @@ paths:
                             examples:
                                 Example:
                                     value:
-                                        - Maire
-                                        - Kalle
+                                        name: JuuksurRisto6
+                                        Contact_Details: JuuksurRisto6@gmail.com
                     description: |
                         Succeeded
                 '404':
@@ -141,8 +143,8 @@ paths:
                             examples:
                                 List of barbers:
                                     value:
-                                        - Maire
-                                        - Kalle
+                                        name: JuuksurRisto
+                                        Contact_Details: JuuksurRisto@gmail.com
                     description: |
                         Returns a list of barbers
             summary: Get a list of all barbers
@@ -157,8 +159,8 @@ paths:
                         examples:
                             example:
                                 value:
-                                    contact_details: 30.08
-                                    name: some text
+                                    name: JuuksurRisto2
+                                    Contact_Details: JuuksurRisto2@gmail.com
                 required: true
             tags:
                 - barbers
