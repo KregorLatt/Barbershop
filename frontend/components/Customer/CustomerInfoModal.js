@@ -1,5 +1,6 @@
 import confirmationModal from "../ConfirmationModal.js";
-
+import customerForm from ".//CustomerForm.js"
+import customerDetails from ".//CustomerDetails.js"
 export default {
     /*html*/
     template: `
@@ -10,22 +11,8 @@ export default {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Id</th>
-                        <td>{{customerInModal.id}}</td>
-                    </tr>
-                    <tr>
-                        <th>Name</th>
-                        <td v-if="isEditing"><input v-model="modifiedcustomer.name"></td>
-                        <td v-else>{{customerInModal.name}}</td>
-                    </tr>
-                    <tr>
-                        <th>Contact_details</th>
-                        <td v-if="isEditing"><input v-model="modifiedcustomer.contact_details"></td>
-                        <td v-else>{{customerInModal.contact_details}}</td>
-                    </tr>
-                </table>
+            <customer-form v-if="isEditing" v-model:id="modifiedCustomer.id" v-model:name="modifiedCustomer.name" v-model:price="modifiedCustomer.contact_details" ></customer-form>
+            <customer-details v-else :customerInModal="customerInModal"></customer-details>
             </div>
             
             <div class="modal-footer">
@@ -56,7 +43,9 @@ export default {
 <confirmation-modal :target="'#customerInfoModal'" @confirmed="deletecustomer"></confirmation-modal>
     `,
     components: {
-        confirmationModal
+        confirmationModal,
+        customerForm,
+        customerDetails
     },
     emits: ["customerUpdated"],
     props: {

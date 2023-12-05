@@ -25,6 +25,9 @@ export default{
         async created(){
             this.customers = await (await fetch("http://localhost:8080/customers")).json()
         },
+        // async beforeUpdate() {
+    //     this.customers = await (await fetch("http://localhost:8080/customers")).json()
+    // },
         methods: {
             getcustomer: async function (id) {
                 const customerInModal = await (await fetch(this.API_URL + "/customers/" + id)).json()
