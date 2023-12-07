@@ -5,11 +5,13 @@ export default {
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Description</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="service in services">
-                <td @click="getservice(service.id)">{{ service.name }}</td>
+                <td @click="getservice(service.id)">{{ service.service_name }}</td>
+                <td>{{ service.description }}</td>
             </tr>
         </tbody>
     </table>

@@ -4,8 +4,8 @@ const { getBaseurl } = require("./helpers")
 
 // CREATE
 exports.createNew = async (req, res) => {
-    if (!req.body.service_name|| !req.body.price|| !req.body.description) {
-        return res.status(400).send({ error: "Required parameter 'name' is missing" })
+    if (!req.body.service_name|| !req.body.description) {
+        return res.status(400).send({ error: "One or all required parameters are missing" })
     }
     const createdService = await services.create({ ...req.body }, {
         fields: ["service_name","description"]

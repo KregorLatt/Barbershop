@@ -9,9 +9,9 @@ export default {
     <services-list :key="update" @showModal="openModal"></services-list>
     <service-info-modal @serviceUpdated="updateView" :serviceInModal="serviceInModal"></service-info-modal>
     <new-object-modal id="newServiceModal" @save="saveNewService">
-    <service-form v-model:name="serviceInModal.name" v-model:price="serviceInModal.price"></service-form>
-    <div class="alert alert-danger" role="alert" v-show="error">{{error}}</div>
-</new-object-modal>
+        <service-form v-model:service_name="serviceInModal.service_name" v-model:description="serviceInModal.description"></service-form>
+        <div class="alert alert-danger" role="alert" v-show="error">{{error}}</div>
+    </new-object-modal>
     `,
     components: {
         servicesList,
@@ -22,7 +22,7 @@ export default {
     data() {
         return {
             update: 0,
-            serviceInModal: { id: "", name: "" , price: "" , description:""},
+            serviceInModal: { id: "", name: "" , description:""},
             newServiceModal: {},
             error: ""
         }

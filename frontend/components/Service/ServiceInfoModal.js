@@ -1,3 +1,6 @@
+import confirmationModal from "../ConfirmationModal.js"
+import serviceForm from "./ServiceForm.js"
+import serviceDetails from "./ServiceDetails.js"
 export default {
     /*html*/
     template: `
@@ -8,22 +11,8 @@ export default {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Id</th>
-                        <td>{{serviceInModal.id}}</td>
-                    </tr>
-                    <tr>
-                        <th>Name</th>
-                        <td v-if="isEditing"><input v-model="modifiedService.name"></td>
-                        <td v-else>{{serviceInModal.name}}</td>
-                    </tr>
-                    <tr>
-                        <th>Price</th>
-                        <td v-if="isEditing"><input v-model="modifiedService.price"></td>
-                        <td v-else>{{serviceInModal.price}}</td>
-                    </tr>
-                </table>
+                <service-form v-if="isEditing" v-model:id="modifiedService.id" v-model:service_name="modifiedService.service_name" v-model:description="modifiedService.description" ></service-form>
+                <service-details v-else :serviceInModal="serviceInModal"></service-details>
             </div>
             <div class="modal-footer">
                 <template v-if="isEditing">
@@ -39,6 +28,11 @@ export default {
     </div>
 </div>
     `,
+    components: {
+        confirmationModal,
+        serviceForm,
+        serviceDetails
+    },
     emits: ["serviceUpdated"],
     props: {
         serviceInModal: {}
