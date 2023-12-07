@@ -8,7 +8,7 @@ exports.createNew = async (req, res) => {
         return res.status(400).send({ error: "One or all required parameters are missing" })
     }
     const createdBarber = await barbers.create(req.body, {
-        fields: ["name", "Contact_details"]
+        fields: ["name", "contact_details"]
     })
     res.status(201)
         .location(`${getBaseurl(req)}/barber/${createdBarber.id}`)
@@ -16,7 +16,7 @@ exports.createNew = async (req, res) => {
 }
 // READ
 exports.getAll = async (req, res) => {
-    const result = await barbers.findAll({ attributes: ["id", "name"] })
+    const result = await barbers.findAll({ attributes: ["id", "name","contact_details"] })
     res.json(result)
 }
 exports.getById = async (req, res) => {
@@ -32,7 +32,7 @@ exports.editById = async (req, res) => {
     console.log(req.params)
     const updateResult = await barbers.update({ ...req.body }, {
         where: { id: req.params.id },
-        fields: ["name", "Contact_details"]
+        fields: ["name", "contact_details"]
     })
     if (updateResult[0] == 0) {
         return res.status(404).send({ error: "Barber not found" })

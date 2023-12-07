@@ -13,9 +13,6 @@ module.exports = (dbConnection, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false
         }
-        
-        
-
     })
     return Barber
 }

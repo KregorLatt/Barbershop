@@ -7,7 +7,7 @@ paths:
     '/barbers/{id}':
         get:
             tags:
-                - details
+                - barbers
             parameters:
                 -
                     examples:
@@ -24,15 +24,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                type: array
-                                items:
-                                    type: string
+                                $ref: '#/components/schemas/barber'
                             examples:
                                 Full details of a given barber:
                                     value:
                                         id: 3
                                         name: JuuksurRisto3
-                                        contact_Details: JuuksurRisto3@gmail.com
+                                        contact_details: JuuksurRisto3@gmail.com
                     description: |
                         Returns full details of a given id barber
                 '404':
@@ -53,14 +51,13 @@ paths:
                 content:
                     application/json:
                         schema:
-                            type: array
-                            items:
-                                type: string
+                            $ref: '#/components/schemas/barber'
                         examples:
-                            Update barber:
+                            example:
                                 value:
-                                    name: JuuksurRisto5
-                                    Contact_Details: JuuksurRisto5@gmail.com
+                                    name: barbar
+                                    contact_details: barbar@gmail.com
+                                    id: 1
                 required: true
             tags:
                 - barbers
@@ -86,7 +83,7 @@ paths:
                                     value:
                                         id: 3
                                         name: JuuksurRisto3
-                                        contact_Details: JuuksurRisto3@gmail.com
+                                        contact_details: JuuksurRisto3@gmail.com
                     description: |
                         Succeeded
                 '404':
@@ -104,12 +101,12 @@ paths:
             description: Adds full detail of a given barber id.
         delete:
             tags:
-                - Delete
+                - barbers
             parameters:
                 -
                     examples:
-                        small:
-                            value: '7'
+                        example:
+                            value: '1'
                     name: id
                     description: |
                         Identificator for the barber
@@ -141,13 +138,20 @@ paths:
                     content:
                         application/json:
                             schema:
-                                type: string
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/barber'
                             examples:
                                 List of barbers:
                                     value:
-                                        id: 1
-                                        name: JuuksurRisto
-                                        contact_Details: JuuksurRisto@gmail.com
+                                        -
+                                            name: risto
+                                            contact_details: risto@gmail.com
+                                            id: 1
+                                        -
+                                            name: B
+                                            contact_details: b@gmail.com
+                                            id: 2
                     description: |
                         Returns a list of barbers
             summary: Get a list of all barbers
@@ -158,13 +162,12 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/new-barber'
+                            $ref: '#/components/schemas/barber'
                         examples:
                             example:
                                 value:
-                                    id: '1'
-                                    name: JuuksurRisto2
-                                    contact_Details: JuuksurRisto2@gmail.com
+                                    name: barbar
+                                    contact_details: barbar@gmail.com
                 required: true
             tags:
                 - barbers
@@ -188,10 +191,18 @@ paths:
                             schema:
                                 type: array
                                 items:
-                                    type: string
+                                    $ref: '#/components/schemas/service'
                             examples:
                                 service:
-                                    value: "\t{\"id\":1,\"service_name\":\"Meestelõikus\",\"price\":\"5\",\"description\":\"Masinlõikus\"}"
+                                    value:
+                                        -
+                                            service_name: some text
+                                            description: some text
+                                            id: 86
+                                        -
+                                            service_name: some text
+                                            description: some text
+                                            id: 25
                     description: Returns a list of all services in API
             summary: Get a list of all Services
             description: Returns a list of all services in API
@@ -201,30 +212,17 @@ paths:
                 content:
                     application/json:
                         schema:
-                            type: array
-                            items:
-                                type: string
+                            $ref: '#/components/schemas/service'
                         examples:
                             service:
                                 value:
-                                    service_name: Meestelõikus
-                                    price: '5'
-                                    description: Masinlõikus
+                                    service_name: juuste varvimine
+                                    price: 74
+                                    description: juuste varvimine
                 required: true
             tags:
                 - services
             responses:
-                '200':
-                    content:
-                        application/json:
-                            schema:
-                                type: array
-                                items:
-                                    type: string
-                            examples:
-                                Created service:
-                                    value: "\t{\"id\":1,\"service_name\":\"Meestelõikus\",\"price\":\"5\",\"description\":\"Masinlõikus\"}"
-                    description: New service has been created
                 '201':
                     content:
                         application/json:
@@ -252,7 +250,7 @@ paths:
     '/services/{id}':
         get:
             tags:
-                - details
+                - services
             parameters:
                 -
                     examples:
@@ -269,16 +267,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                type: array
-                                items:
-                                    type: string
+                                $ref: '#/components/schemas/service'
                             examples:
                                 Full details of given services:
                                     value:
-                                        id: 1
-                                        service_name: Meestelõikus
-                                        price: '5'
-                                        description: Masinlõikus
+                                        service_name: some text
+                                        description: some text
+                                        id: 63
                     description: |
                         Returns full details of a given id service
                 '404':
@@ -300,16 +295,14 @@ paths:
                 content:
                     application/json:
                         schema:
-                            type: array
-                            items:
-                                type: string
+                            $ref: '#/components/schemas/service'
                         examples:
                             new service:
                                 value:
+                                    service_name: Meesteloikus
+                                    price: 18
+                                    description: kaaridega
                                     id: 1
-                                    Service_name: Meestelõikus
-                                    price: '5'
-                                    Description: Masinlõikus
                 required: true
             tags:
                 - services
@@ -317,7 +310,7 @@ paths:
                 -
                     examples:
                         small:
-                            value: '5'
+                            value: '1'
                     name: id
                     description: Identificator for the service
                     schema:
@@ -325,17 +318,6 @@ paths:
                     in: path
                     required: true
             responses:
-                '202':
-                    content:
-                        application/json:
-                            schema:
-                                type: array
-                                items:
-                                    type: string
-                            examples:
-                                Accepted:
-                                    value: "\t{\"id\":1,\"service_name\":\"Meestelõikus\",\"price\":\"5\",\"description\":\"Masinlõikus\"}"
-                    description: Accepted
                 '204':
                     content:
                         application/json:
@@ -369,7 +351,7 @@ paths:
                 -
                     examples:
                         small:
-                            value: '5'
+                            value: '1'
                     name: id
                     description: Identificator for the service
                     schema:
@@ -399,18 +381,26 @@ paths:
     /customer:
         get:
             tags:
-                - Customers
+                - customers
             responses:
                 '200':
                     content:
                         application/json:
                             schema:
-                                type: string
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/customer'
                             examples:
-                                List of customers:
+                                example:
                                     value:
-                                        - Maire
-                                        - Kalle
+                                        -
+                                            name: maire
+                                            contact_details: gmail@sm.com
+                                            id: 1
+                                        -
+                                            name: voldemar
+                                            contact_details: voldemar@sm.com
+                                            id: 2
                     description: Returns a list of customers
             summary: Get a list of all customers
             description: Returns a list of all barbers in API
@@ -420,12 +410,12 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/new-customer'
+                            $ref: '#/components/schemas/customer'
                         examples:
-                            new-customer:
+                            example:
                                 value:
-                                    name: some text
-                                    contact_details: 30.08
+                                    name: Joosep
+                                    contact_details: joosep@gmail.com
                 required: true
             tags:
                 - customers
@@ -439,7 +429,7 @@ paths:
     '/customer/{id}':
         get:
             tags:
-                - details
+                - customers
             parameters:
                 -
                     examples:
@@ -454,6 +444,16 @@ paths:
                     required: true
             responses:
                 '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/customer'
+                            examples:
+                                example:
+                                    value:
+                                        name: some text
+                                        contact_details: some text
+                                        id: 10
                     description: Returns full details of a given id barber
                 '404':
                     content:
@@ -467,13 +467,25 @@ paths:
                     description: Customer was not in customers array
             description: Returns full details of a given id customer
         put:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/customer'
+                        examples:
+                            example:
+                                value:
+                                    name: joosep
+                                    contact_details: joosep@email.com
+                                    id: 1
+                required: true
             tags:
-                - Customers
+                - customers
             parameters:
                 -
                     examples:
                         small:
-                            value: '6'
+                            value: '1'
                     name: id
                     description: Identificator for the customer
                     schema:
@@ -504,15 +516,15 @@ paths:
                     description: |
                         Customer not found
             summary: Add full details of a customers
-            description: Adds full detail of a given customer id.
+            description: Edits detail of a given customer id.
         delete:
             tags:
-                - Delete
+                - customers
             parameters:
                 -
                     examples:
                         small:
-                            value: '7'
+                            value: '1'
                     name: id
                     description: Delete full details of customer
                     schema:
@@ -539,7 +551,7 @@ paths:
                 name: id
                 in: path
                 required: true
-    /appointment:
+    /appointments:
         get:
             tags:
                 - appointments
@@ -549,11 +561,215 @@ paths:
                         application/json:
                             schema:
                                 type: array
-                                items: {}
+                                items:
+                                    $ref: '#/components/schemas/appointment'
+                            examples:
+                                example:
+                                    value:
+                                        -
+                                            id: 1
+                                            customerId: 1
+                                            barberId: 1
+                                            serviceId: 1
+                                            datetime: 12/02/2002
+                                        -
+                                            id: 2
+                                            customerId: 2
+                                            barberId: 1
+                                            serviceId: 1
+                                            datetime: 13/02/2002
                     description: Retutns a list of appointments
             summary: Get a list of all appointment
             description: Returns a list of all appointments in API
-    '/appointment/{id}': {}
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/appointment'
+                        examples:
+                            example:
+                                value:
+                                    customerId: 1
+                                    barberId: 1
+                                    serviceId: 1
+                                    datetime: 31/01/1970
+                required: true
+            tags:
+                - appointments
+            responses:
+                '201':
+                    description: Appointment has been created
+                '400':
+                    description: one or more parameters missing
+    '/appointments/{id}':
+        get:
+            tags:
+                - appointments
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/appointment'
+                            examples:
+                                example:
+                                    value:
+                                        id: 1
+                                        customerId: 1
+                                        barberId: 1
+                                        serviceId: 1
+                                        datetime: 12/02/2002
+                    description: Found appointment
+                '404':
+                    description: appointment not found
+        put:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/appointment'
+                        examples:
+                            example:
+                                value:
+                                    id: 1
+                                    customerId: 1
+                                    barberId: 1
+                                    serviceId: 1
+                                    datetime: 17/09/2020
+                required: true
+            tags:
+                - appointments
+            responses:
+                '204':
+                    description: appointment updated
+                '404':
+                    description: appointment not found
+        delete:
+            tags:
+                - appointments
+            responses:
+                '204':
+                    description: appointment deleted
+                '404':
+                    description: appointment not found
+        parameters:
+            -
+                examples:
+                    example:
+                        value: '1'
+                name: id
+                schema:
+                    type: integer
+                in: path
+                required: true
+    /barberservices/:
+        get:
+            tags:
+                - barberservices
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/barberservice'
+                            examples:
+                                example:
+                                    value:
+                                        -
+                                            serviceId: 1
+                                            id: 1
+                                            barberId: 2
+                                            price: 73
+                                        -
+                                            serviceId: 2
+                                            id: 2
+                                            barberId: 2
+                                            price: 29
+                    description: Retutns a list of appointments
+            summary: Get a list of all appointment
+            description: Returns a list of all appointments in API
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/barberservice'
+                        examples:
+                            example:
+                                value:
+                                    serviceId: 1
+                                    barberId: 1
+                                    price: 10
+                required: true
+            tags:
+                - barberservices
+            responses:
+                '201':
+                    description: BarberService has been created
+                '400':
+                    description: one or more parameters missing
+    '/barberservices/{id}/':
+        get:
+            tags:
+                - barberservices
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/barberservice'
+                            examples:
+                                example:
+                                    value:
+                                        serviceId: 1
+                                        id: 1
+                                        barberId: 1
+                                        price: 10
+                    description: Found barberservice
+                '404':
+                    description: barberservice not found
+        put:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/barberservice'
+                        examples:
+                            example:
+                                value:
+                                    serviceId: 1
+                                    id: 1
+                                    barberId: 1
+                                    price: 10
+                required: true
+            tags:
+                - barberservices
+            responses:
+                '204':
+                    description: barberservice updated
+                '404':
+                    description: appointment not found
+        delete:
+            tags:
+                - barberservices
+            responses:
+                '204':
+                    description: barberservice deleted
+                '404':
+                    description: barberservice not found
+        parameters:
+            -
+                examples:
+                    example:
+                        value: '1'
+                name: id
+                schema:
+                    type: integer
+                in: path
+                required: true
 components:
     schemas:
         error:
@@ -565,54 +781,80 @@ components:
                     type: string
             example:
                 error: Error message.
-        delete-barber:
+        service:
             description: ''
-            required:
-                - id
+            required: []
+            type: object
+            properties:
+                service_name:
+                    description: ''
+                    type: string
+                description:
+                    description: ''
+                    type: string
+                id:
+                    description: ''
+                    type: integer
+        barber:
+            description: ''
+            required: []
+            type: object
+            properties:
+                name:
+                    description: ''
+                    type: string
+                contact_details:
+                    description: ''
+                    type: string
+                id:
+                    description: ''
+                    type: integer
+        appointment:
+            description: ''
             type: object
             properties:
                 id:
                     description: ''
+                    type: integer
+                customerId:
+                    description: ''
+                    type: integer
+                barberId:
+                    description: ''
+                    type: integer
+                serviceId:
+                    description: ''
+                    type: integer
+                datetime:
+                    description: ''
                     type: string
-            example:
-                id: 1
-        new-barber:
+        customer:
             description: ''
-            type: object
-            properties:
-                contact_details:
-                    format: float
-                    description: ''
-                    type: number
-                name:
-                    description: ''
-                    type: string
-        new-service:
-            description: ''
-            required:
-                - Service_name
-                - Price
-                - Description
-            type: object
-            properties:
-                Service_name:
-                    description: ''
-                    type: string
-                Price:
-                    format: float
-                    description: ''
-                    type: number
-                Description:
-                    description: ''
-                    type: string
-        new-customer:
-            description: ''
+            required: []
             type: object
             properties:
                 name:
                     description: ''
                     type: string
                 contact_details:
-                    format: float
                     description: ''
-                    type: number
+                    type: string
+                id:
+                    description: ''
+                    type: integer
+        barberservice:
+            description: ''
+            type: object
+            properties:
+                serviceId:
+                    description: ''
+                    type: integer
+                id:
+                    description: ''
+                    type: integer
+                barberId:
+                    description: ''
+                    type: integer
+                price:
+                    description: ''
+                    type: integer

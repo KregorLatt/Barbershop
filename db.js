@@ -20,13 +20,19 @@ db.connection = sequelize
 db.barbers = require("./models/Barber")(sequelize, Sequelize)
 db.services = require("./models/Service")(sequelize, Sequelize)
 db.barberServices = require("./models/BarberService")(sequelize, Sequelize, db.barbers, db.services)
+db.customers = require("./models/Customer")(sequelize, Sequelize)
+db.appointments = require("./models/Appointment")(sequelize, Sequelize, db.customers, db.services, db.barbers)
 
-db.barbers.belongsToMany(db.services, { through: db.barberServices })
-db.services.belongsToMany(db.barbers, { through: db.barberServices })
-db.barbers.hasMany(db.barberServices)
-db.services.hasMany(db.barberServices)
-db.barberServices.belongsTo(db.barbers)
-db.barberServices.belongsTo(db.services)
+db.barbers.hasMany(db.barberServices, { foreignKey: "barberId" })
+db.barberServices.belongsTo(db.barbers, { foreignKey: "barberId" })
+db.services.hasMany(db.barberServices, { foreignKey: "serviceId" })
+db.barberServices.belongsTo(db.services, { foreignKey: "serviceId" })
+db.customers.hasMany(db.appointments, { foreignKey: "customerId" })
+db.appointments.belongsTo(db.customers, { foreignKey: "customerId" })
+db.barbers.hasMany(db.appointments, { foreignKey: "barberId" })
+db.appointments.belongsTo(db.barbers, { foreignKey: "barberId" })
+db.services.hasMany(db.appointments, { foreignKey: "serviceId" })
+db.appointments.belongsTo(db.services, { foreignKey: "serviceId" })
 
 sync = async () => {
     if (process.env.DROP_DB === "true") {
@@ -55,7 +61,7 @@ sync = async () => {
             },
             defaults: {
                 service_name: "Meesteloikus",
-                
+                description: "masina lõikus"
             }
         })
         console.log("service created: ", createdS)
@@ -64,12 +70,23 @@ sync = async () => {
                 id: 1
             },
             defaults: {
-                BarberId: barber.id,
-                ServiceId: service.id,
-                AssignedService: "meesteloikus"
+                barberId: barber.id,
+                serviceId: service.id,
+                price: 10
             }
         })
         console.log("barberService created: ", createdBS)
+        
+        const [customer, createdC] = await db.customers.findOrCreate({
+            where: {
+                name: "Maire",
+            },
+            defaults: {
+                name: "Maire",
+                contact_details: "maire@gmail.com"
+            }
+        })
+        console.log("customer created: ", createdC)
     }
     else {
         console.log("Begin ALTER")

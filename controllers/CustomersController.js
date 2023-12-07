@@ -3,7 +3,7 @@ const customers = db.customers
 const { getBaseurl } = require("./helpers.js")
 //Create
 exports.createNew = async (req, res) => {
-    if (!req.body.brand || !req.body.model || !req.body.year || !req.body.origin) {
+    if (!req.body.name || !req.body.contact_details) {
         return res.status(400).send({ error: "one or more parameters are missing" })
     }
     const createdCustomer = await customers.create(req.body, {

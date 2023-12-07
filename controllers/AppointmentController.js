@@ -1,13 +1,14 @@
 const { db } = require("../db.js")
-const appointments = db.appointmentsCreate
+const appointments = db.appointments
 const { getBaseurl } = require("./helpers.js")
+
 //Create
 exports.createNew = async (req, res) => {
-    if (!req.body.id || !req.body.customerId || !req.body.serviceId || !req.body.datetime) {
+    if (!req.body.customerId || !req.body.serviceId || !req.body.barberId || !req.body.datetime) {
         return res.status(400).send({ error: "one or more parameters are missing" })
     }
     const createdAppointment = await appointments.create(req.body, {
-        fields: ["id", "customerId", "serviceId", "datetime"]
+        fields: ["id", "customerId", "serviceId", "barberId", "datetime"]
     })
     res.status(201)
         .location(`${getBaseurl(req)}/appointments/${createdAppointment.id}`)
@@ -16,7 +17,7 @@ exports.createNew = async (req, res) => {
 
 //Read
 exports.getAll = async (req, res) => {
-    const result = await appointments.findAll({ attributes: ["id","customerId", "serviceId", "datetime"] })
+    const result = await appointments.findAll({ attributes: ["id","customerId", "serviceId", "barberId", "datetime"] })
     res.json(result)
 }
 exports.getById = async (req, res) => {
@@ -26,11 +27,12 @@ exports.getById = async (req, res) => {
     }
     res.json(foundAppointment)
 }
+
 // UPDATE
 exports.editById = async (req, res) => {
     const updatedResult = await appointments.update({ ...req.body }, {
         where: { id: req.params.id },
-        fields: ["id", "customerId", "serviceId", "datetime"]
+        fields: ["id", "customerId", "serviceId", "barberId", "datetime"]
     })
     if (updatedResult[0] == 0) {
         return res.status(404).send({ error: "Appointment not found" })
@@ -39,7 +41,6 @@ exports.editById = async (req, res) => {
         .location(`${getBaseurl(req)}/appointments/${req.params.id}`)
         .send()
 }
-
 
 // DELETE
 exports.deleteById = async (req, res) => {

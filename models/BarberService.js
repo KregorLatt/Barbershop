@@ -5,11 +5,11 @@ module.exports = (dbConnection, Sequelize, Barber, Service) => {
             primaryKey: true,
             autoIncrement: true
         },
-        AssignedService: {
+        price: {
             type: Sequelize.INTEGER,
             allowNull: false
         },
-        BarberId: {
+        barberId: {
             type: Sequelize.INTEGER,
             allowNull: false,
             references: {
@@ -17,7 +17,7 @@ module.exports = (dbConnection, Sequelize, Barber, Service) => {
                 key: "id"
             }
         },
-        ServiceId: {
+        serviceId: {
             type: Sequelize.INTEGER,
             allowNull: false,
             references: {

@@ -1,18 +1,18 @@
 const { db } = require("../db")
-const barberService = db.barberService
+const barberService = db.barberServices
 const { getBaseurl } = require("./helpers")
 
 // CREATE
 exports.createNew = async (req, res) => {
-    if (!req.body.name || !req.body.contact_details) {
+    if (!req.body.barberId || !req.body.serviceId) {
         return res.status(400).send({ error: "One or all required parameters are missing" })
     }
-    const createdBarber = await barberService.create(req.body, {
-        fields: ["name", "contact_details"]
+    const createdBarberService = await barberService.create(req.body, {
+        fields: ["barberId", "serviceId","price"]
     })
     res.status(201)
-        .location(`${getBaseurl(req)}/barbers/${createdBarber.id}`)
-        .json(createdBarber)
+        .location(`${getBaseurl(req)}/barberservices/${createdBarberService.id}`)
+        .json(createdBarberService)
 }
 // READ
 exports.getAll = async (req, res) => {
@@ -22,32 +22,32 @@ exports.getAll = async (req, res) => {
     res.json(result)
 }
 exports.getById = async (req, res) => {
-    const foundBarber = await barberService.findByPk(req.params.id)
-    if (foundBarber === null) {
-        return res.status(404).send({ error: `Barber not found` })
+    const foundBarberService = await barberService.findByPk(req.params.id)
+    if (foundBarberService === null) {
+        return res.status(404).send({ error: `BarberService not found` })
     }
-    res.json(foundBarber)
+    res.json(foundBarberService)
 }
 // UPDATE
 exports.editById = async (req, res) => {
     const updateResult = await barberService.update({ ...req.body }, {
         where: { id: req.params.id },
-        fields: ["name", "contact_details"]
+        fields: ["barberId", "serviceId","price"]
     })
     if (updateResult[0] == 0) {
-        return res.status(404).send({ error: "Barber not found" })
+        return res.status(404).send({ error: "BarberService not found" })
     }
     res.status(204)
-        .location(`${getBaseurl(req)}/barbers/${req.params.id}`)
+        .location(`${getBaseurl(req)}/barberservices/${req.params.id}`)
         .send()
 }
 // DELETE
 exports.deleteById = async (req, res) => {
-    const deletedAmount = await barberServicePlays.destroy({
+    const deletedAmount = await barberService.destroy({
         where: { id: req.params.id }
     })
     if (deletedAmount === 0) {
-        return res.status(404).send({ error: "Barber not found" })
+        return res.status(404).send({ error: "BarberService not found" })
     }
     res.status(204).send()
 }

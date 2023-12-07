@@ -8,7 +8,7 @@ exports.createNew = async (req, res) => {
         return res.status(400).send({ error: "Required parameter 'name' is missing" })
     }
     const createdService = await services.create({ ...req.body }, {
-        fields: ["service_name","price","description"]
+        fields: ["service_name","description"]
     })
     res.status(201)
         .location(`${getBaseurl(req)}/services/${createdService.id}`)
@@ -16,7 +16,7 @@ exports.createNew = async (req, res) => {
 } 
 // READ
 exports.getAll = async (req, res) => {
-    const result = await services.findAll({ attributes: ["id","service_name",] })
+    const result = await services.findAll({ attributes: ["id","service_name","description"] })
     res.json(result)
 }
 exports.getById = async (req, res) => {
@@ -35,7 +35,7 @@ exports.editById = async (req, res) => {
     
     const updateResult = await services.update({ ...foundPlayer,...req.body }, {
         where: { id: req.params.id },
-        fields: ["service_name","price","description"]
+        fields: ["service_name","description"]
     })
     if (updateResult[0] == 0) {
         return res.status(404).send({ error: "Service  not found" })
