@@ -5,7 +5,7 @@ export default{
             <thead>
                 <tr>
                 <th>Name</th>
-                <th>Contact_details</th>
+                <th>Contact details</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +29,7 @@ export default{
     //     this.customers = await (await fetch("http://localhost:8080/customers")).json()
     // },
         methods: {
-            getcustomer: async function (id) {
+            getCustomer: async function (id) {
                 const customerInModal = await (await fetch(this.API_URL + "/customers/" + id)).json()
                 this.$emit("showModal", customerInModal)
             }
