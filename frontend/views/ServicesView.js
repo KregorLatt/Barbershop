@@ -41,7 +41,7 @@ export default {
         },
         updateView(service) {
             this.update++
-            this.serviceInfoModal = service
+            this.serviceInModal = service
         },
         async saveNewService() {
             console.log("Saving:", this.serviceInModal)
