@@ -15,7 +15,21 @@ exports.createNew = async (req, res) => {
         .json(createdAppointment)
 }
 
-//Read
+// Function to format datetime to a string suitable for HTML datetime-local input
+const formatDatetimeForHTMLInput = (datetime) => {
+  const pad = (value) => (value < 10 ? `0${value}` : value);
+  
+  const date = new Date(datetime);
+  const year = date.getFullYear();
+  const month = pad(date.getMonth() + 1);
+  const day = pad(date.getDate());
+  const hours = pad(date.getHours());
+  const minutes = pad(date.getMinutes());
+
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+};
+
+// Read
 exports.getAll = async (req, res) => {
   const result = await appointments.findAll({
     attributes: ["id", "customerId", "barberServiceId", "datetime"],
@@ -37,34 +51,46 @@ exports.getAll = async (req, res) => {
     ],
   });
 
-  res.json(result);
+  // Map the result to format datetime for HTML input
+  const formattedResult = result.map((appointment) => ({
+    ...appointment.get(),
+    datetime: formatDatetimeForHTMLInput(appointment.datetime),
+  }));
+
+  res.json(formattedResult);
 };
 
 exports.getById = async (req, res) => {
-    const foundAppointment = await appointments.findByPk(req.params.id, {
+  const foundAppointment = await appointments.findByPk(req.params.id, {
+    include: [
+      {
+        model: db.customers,
+      },
+      {
+        model: db.barberServices,
         include: [
           {
-            model: db.customers,
+            model: db.barbers,
           },
           {
-            model: db.barberServices,
-            include: [
-              {
-                model: db.barbers,
-              },
-              {
-                model: db.services,
-              },
-            ],
+            model: db.services,
           },
         ],
-      });
-    if (foundAppointment === null) {
-        return res.status(404).send({ error: `Appointment not found` })
-    }
-    res.json(foundAppointment)
-}
+      },
+    ],
+  });
+  if (foundAppointment === null) {
+    return res.status(404).send({ error: `Appointment not found` });
+  }
 
+  // Format datetime for HTML input
+  const formattedAppointment = {
+    ...foundAppointment.get(),
+    datetime: formatDatetimeForHTMLInput(foundAppointment.datetime),
+  };
+
+  res.json(formattedAppointment);
+};
 // UPDATE
 exports.editById = async (req, res) => {
     const updatedResult = await appointments.update({ ...req.body }, {

@@ -4,7 +4,7 @@ export default {
     <table class="table table-striped">
     <tr>
         <th>Id</th>
-        <td>id</td>
+        <td>{{id}}</td>
     </tr>
     <tr>
         <th>Customer</th>
