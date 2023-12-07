@@ -66,28 +66,6 @@ th {
     text-align: left;
 }
 
-/* Button Styles */
-.btn {
-    display: inline-block;
-    padding: 8px 16px;
-    text-align: center;
-    text-decoration: none;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.btn-secondary {
-    background-color: #6c757d;
-}
-
-.btn-outline-success {
-    background-color: #28a745;
-    color: #fff;
-    border: 1px solid #28a745;
-}
-
 /* Navbar Styles */
 .navbar {
     background-color: #8f5600;

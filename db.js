@@ -23,18 +23,15 @@ db.barberServices = require("./models/BarberService")(sequelize, Sequelize, db.b
 db.customers = require("./models/Customer")(sequelize, Sequelize)
 db.appointments = require("./models/Appointment")(sequelize, Sequelize, db.customers, db.services, db.barbers)
 
-db.barbers.hasMany(db.barberServices, { foreignKey: "barberId" })
-db.barberServices.belongsTo(db.barbers, { foreignKey: "barberId" })
-db.services.hasMany(db.barberServices, { foreignKey: "serviceId" })
-db.barberServices.belongsTo(db.services, { foreignKey: "serviceId" })
-db.customers.hasMany(db.appointments, { foreignKey: "customerId" })
-
-db.appointments.belongsTo(db.barberServices, { foreignKey: "barberServiceId" })
-db.barberServices.hasMany(db.appointments, { foreignKey: "barberServiceId" })
-db.appointments.belongsTo(db.customers, { foreignKey: "customerId" })
-db.customers.hasMany(db.appointments, { foreignKey: "customerId" })
-
-//db.appointments.hasOne(db.barbers, { foreignKey: "barberId", through: db.barberServices  })
+db.barbers.hasMany(db.barberServices, { foreignKey: "barberId", onDelete: 'CASCADE' });
+db.barberServices.belongsTo(db.barbers, { foreignKey: "barberId", onDelete: 'CASCADE' });
+db.services.hasMany(db.barberServices, { foreignKey: "serviceId", onDelete: 'CASCADE' });
+db.barberServices.belongsTo(db.services, { foreignKey: "serviceId", onDelete: 'CASCADE' });
+db.customers.hasMany(db.appointments, { foreignKey: "customerId", onDelete: 'CASCADE' });
+db.barberServices.hasMany(db.appointments, { foreignKey: "barberServiceId", onDelete: 'CASCADE' });
+db.appointments.belongsTo(db.barberServices, { foreignKey: "barberServiceId", onDelete: 'CASCADE' });
+db.customers.hasMany(db.appointments, { foreignKey: "customerId", onDelete: 'CASCADE' });
+db.appointments.belongsTo(db.customers, { foreignKey: "customerId", onDelete: 'CASCADE' });
 
 sync = async () => {
     if (process.env.DROP_DB === "true") {
