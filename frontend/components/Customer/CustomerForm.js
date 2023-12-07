@@ -12,7 +12,7 @@ export default {
     </tr>
     <tr>
         <th>Contact_details</th>
-        <td><input :value="price" @input="$emit('update:contact_details',$event.target.value)"></td>
+        <td><input :value="contact_details" @input="$emit('update:contact_details',$event.target.value)"></td>
     </tr>
 </table>`,
     props: ["id", "name", "contact_details"],

@@ -54,29 +54,29 @@ export default {
     data() {
         return {
             isEditing: false,
-            modifiedcustomer: {}
+            modifiedCustomer: {}
         }
     },
     methods: {
         startEditing() {
-            this.modifiedcustomer = { ...this.customerInModal }
+            this.modifiedCustomer = { ...this.customerInModal }
             this.isEditing = true
         },
         cancelEditing() {
             this.isEditing = false
         },
         async saveModifiedcustomer() {
-            console.log("Saving:", this.modifiedcustomer);
-            const rawResponse = await fetch(this.API_URL + "/customers/" + this.modifiedcustomer.id, {
+            console.log("Saving:", this.modifiedCustomer);
+            const rawResponse = await fetch(this.API_URL + "/customers/" + this.modifiedCustomer.id, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(this.modifiedcustomer)
+                body: JSON.stringify(this.modifiedCustomer)
             });
             console.log(rawResponse);
-            this.$emit("customerUpdated", this.modifiedcustomer)
+            this.$emit("customerUpdated", this.modifiedCustomer)
             this.isEditing = false
         },
         deleteCustomer() {
