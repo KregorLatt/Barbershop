@@ -22,7 +22,7 @@ module.exports = (dbConnection, Sequelize, Customer, BarberService) => {
             }
         },
         datetime: {
-            type: Sequelize.STRING,
+            type: Sequelize.DATE,
             allowNull: false
         }
     })

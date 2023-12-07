@@ -75,8 +75,15 @@ export default {
                 body: JSON.stringify(this.modifiedAppointment)
             });
             console.log(rawResponse);
-            this.$emit("appointmentUpdated", this.modifiedAppointment)
-            this.isEditing = false
+            // Fetch the updated appointment details from the API
+            const updatedResponse = await fetch(this.API_URL + "/appointments/" + this.modifiedAppointment.id);
+            const updatedAppointment = await updatedResponse.json();
+
+            // Update the appointmentInModal directly with reactive properties
+            Object.assign(this.appointmentInModal, updatedAppointment);
+
+            this.$emit("appointmentUpdated", updatedAppointment);
+            this.isEditing = false;
         },
         async deleteAppointment() {
             console.log("Deleting:", this.modifiedAppointment);
