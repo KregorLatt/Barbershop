@@ -15,18 +15,31 @@ export default {
                 <service-details v-else :serviceInModal="serviceInModal"></service-details>
             </div>
             <div class="modal-footer">
-                <template v-if="isEditing">
-                    <button type="button" class="btn btn-success" @click="saveModifiedService">Save</button>
-                    <button type="button" class="btn btn-secondary" @click="cancelEditing">Cancel</button>
-                </template>
-                <template v-else>
-                    <button type="button" class="btn btn-warning" @click="startEditing">Edit</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </template>
+                <div class="container">
+                    <div class="row">
+                        <template v-if="isEditing">
+                            <div class="col me-auto">
+                                <button type="button" class="btn btn-danger" data-bs-target="#confirmationModal" data-bs-toggle="modal">Delete</button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-success mx-2" @click="saveModifiedService">Save</button>
+                                <button type="button" class="btn btn-secondary" @click="cancelEditing">Cancel</button>
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div class="col me-auto"></div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-warning mx-2" @click="startEditing">Edit</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<confirmation-modal :target="'#serviceInfoModal'" @confirmed="deleteService"></confirmation-modal>
     `,
     components: {
         confirmationModal,
@@ -67,6 +80,11 @@ export default {
         },
         deleteService() {
             console.log("DELETE confirmed");
+            fetch(this.API_URL + "/services/" + this.serviceInModal.id, {
+                method: 'DELETE'
+            });
+            this.$emit("serviceUpdated", {})
+            this.isEditing = false
         }
     }
     }

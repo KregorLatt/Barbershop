@@ -29,7 +29,7 @@ export default {
     },
     methods: {
         openModal(service) {
-            this.serviceInfoModal = service
+            this.serviceInModal = service
             let serviceInfoModal = new bootstrap.Modal(document.getElementById("serviceInfoModal"))
             serviceInfoModal.show()
         },

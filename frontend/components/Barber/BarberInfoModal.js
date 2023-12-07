@@ -2,8 +2,6 @@ import confirmationModal from "../ConfirmationModal.js"
 import barberForm from "./BarberForm.js"
 import barberDetails from "./BarberDetails.js"
 export default {
-    
-
     /*html*/
     template: `
 <div id="barberInfoModal" class="modal" tabindex="-1">
