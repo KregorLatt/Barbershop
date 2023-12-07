@@ -20,12 +20,40 @@ exports.getAll = async (req, res) => {
     res.json(result)
 }
 exports.getById = async (req, res) => {
-    const foundCustomer = await customers.findByPk(req.params.id)
-    if (foundCustomer === null) {
-        return res.status(404).send({ error: `customer not found` })
+    try {
+        const foundCustomer = await customers.findByPk(req.params.id, {
+            include: [
+                {
+                    model: db.appointments,
+                    attributes: ["id", "barberServiceId", "datetime"],
+                    include: [
+                        {
+                            model: db.barberServices,
+                            include: [
+                                {
+                                    model: db.barbers,
+                                },
+                                {
+                                    model: db.services,
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        });
+
+        if (foundCustomer === null) {
+            return res.status(404).send({ error: `Customer not found` });
+        }
+
+        res.json(foundCustomer);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: 'Internal Server Error' });
     }
-    res.json(foundCustomer)
-}
+};
+
 // UPDATE
 exports.editById = async (req, res) => {
     const updatedResult = await customers.update({ ...req.body }, {
