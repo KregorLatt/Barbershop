@@ -378,179 +378,6 @@ paths:
                 name: id
                 in: path
                 required: true
-    /customer:
-        get:
-            tags:
-                - customers
-            responses:
-                '200':
-                    content:
-                        application/json:
-                            schema:
-                                type: array
-                                items:
-                                    $ref: '#/components/schemas/customer'
-                            examples:
-                                example:
-                                    value:
-                                        -
-                                            name: maire
-                                            contact_details: gmail@sm.com
-                                            id: 1
-                                        -
-                                            name: voldemar
-                                            contact_details: voldemar@sm.com
-                                            id: 2
-                    description: Returns a list of customers
-            summary: Get a list of all customers
-            description: Returns a list of all barbers in API
-        post:
-            requestBody:
-                description: A new customer to be created
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/customer'
-                        examples:
-                            example:
-                                value:
-                                    name: Joosep
-                                    contact_details: joosep@gmail.com
-                required: true
-            tags:
-                - customers
-            responses:
-                '201':
-                    description: New customer has been created
-                '400':
-                    description: One or all params are missing
-            summary: creates a customer
-            description: post new customer
-    '/customer/{id}':
-        get:
-            tags:
-                - customers
-            parameters:
-                -
-                    examples:
-                        small:
-                            value: '7'
-                    name: id
-                    description: |
-                        Customer id
-                    schema:
-                        type: number
-                    in: path
-                    required: true
-            responses:
-                '200':
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/customer'
-                            examples:
-                                example:
-                                    value:
-                                        name: some text
-                                        contact_details: some text
-                                        id: 10
-                    description: Returns full details of a given id barber
-                '404':
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
-                            examples:
-                                not found:
-                                    value:
-                                        error: Customer not found
-                    description: Customer was not in customers array
-            description: Returns full details of a given id customer
-        put:
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/customer'
-                        examples:
-                            example:
-                                value:
-                                    name: joosep
-                                    contact_details: joosep@email.com
-                                    id: 1
-                required: true
-            tags:
-                - customers
-            parameters:
-                -
-                    examples:
-                        small:
-                            value: '1'
-                    name: id
-                    description: Identificator for the customer
-                    schema:
-                        type: number
-                    in: path
-                    required: true
-            responses:
-                '204':
-                    content:
-                        application/json:
-                            schema:
-                                type: string
-                            examples:
-                                Example:
-                                    value:
-                                        - Maire
-                                        - Kalle
-                    description: Succeeded
-                '404':
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
-                            examples:
-                                error:
-                                    value:
-                                        error: Customer not found
-                    description: |
-                        Customer not found
-            summary: Add full details of a customers
-            description: Edits detail of a given customer id.
-        delete:
-            tags:
-                - customers
-            parameters:
-                -
-                    examples:
-                        small:
-                            value: '1'
-                    name: id
-                    description: Delete full details of customer
-                    schema:
-                        type: number
-                    in: path
-                    required: true
-            responses:
-                '204':
-                    description: "\r\nSucceeded"
-                '404':
-                    content:
-                        application/json:
-                            schema:
-                                type: string
-                            examples:
-                                error:
-                                    value:
-                                        error: Customer not found
-                    description: Customer was not deleted
-            summary: Delete full details of customer
-            description: Deletes full details of a given id customer
-        parameters:
-            -
-                name: id
-                in: path
-                required: true
     /appointments:
         get:
             tags:
@@ -763,6 +590,179 @@ paths:
                 name: id
                 schema:
                     type: integer
+                in: path
+                required: true
+    /customers:
+        get:
+            tags:
+                - customers
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/customer'
+                            examples:
+                                example:
+                                    value:
+                                        -
+                                            name: maire
+                                            contact_details: gmail@sm.com
+                                            id: 1
+                                        -
+                                            name: voldemar
+                                            contact_details: voldemar@sm.com
+                                            id: 2
+                    description: Returns a list of customers
+            summary: Get a list of all customers
+            description: Returns a list of all barbers in API
+        post:
+            requestBody:
+                description: A new customer to be created
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/customer'
+                        examples:
+                            example:
+                                value:
+                                    name: Joosep
+                                    contact_details: joosep@gmail.com
+                required: true
+            tags:
+                - customers
+            responses:
+                '201':
+                    description: New customer has been created
+                '400':
+                    description: One or all params are missing
+            summary: creates a customer
+            description: post new customer
+    '/customers/{id}':
+        get:
+            tags:
+                - customers
+            parameters:
+                -
+                    examples:
+                        small:
+                            value: '7'
+                    name: id
+                    description: |
+                        Customer id
+                    schema:
+                        type: number
+                    in: path
+                    required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/customer'
+                            examples:
+                                example:
+                                    value:
+                                        name: some text
+                                        contact_details: some text
+                                        id: 10
+                    description: Returns full details of a given id barber
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                not found:
+                                    value:
+                                        error: Customer not found
+                    description: Customer was not in customers array
+            description: Returns full details of a given id customer
+        put:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/customer'
+                        examples:
+                            example:
+                                value:
+                                    name: joosep
+                                    contact_details: joosep@email.com
+                                    id: 1
+                required: true
+            tags:
+                - customers
+            parameters:
+                -
+                    examples:
+                        small:
+                            value: '1'
+                    name: id
+                    description: Identificator for the customer
+                    schema:
+                        type: number
+                    in: path
+                    required: true
+            responses:
+                '204':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                Example:
+                                    value:
+                                        - Maire
+                                        - Kalle
+                    description: Succeeded
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                error:
+                                    value:
+                                        error: Customer not found
+                    description: |
+                        Customer not found
+            summary: Add full details of a customers
+            description: Edits detail of a given customer id.
+        delete:
+            tags:
+                - customers
+            parameters:
+                -
+                    examples:
+                        small:
+                            value: '1'
+                    name: id
+                    description: Delete full details of customer
+                    schema:
+                        type: number
+                    in: path
+                    required: true
+            responses:
+                '204':
+                    description: "\r\nSucceeded"
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                error:
+                                    value:
+                                        error: Customer not found
+                    description: Customer was not deleted
+            summary: Delete full details of customer
+            description: Deletes full details of a given id customer
+        parameters:
+            -
+                name: id
                 in: path
                 required: true
 components:
