@@ -28,11 +28,13 @@ db.barberServices.belongsTo(db.barbers, { foreignKey: "barberId" })
 db.services.hasMany(db.barberServices, { foreignKey: "serviceId" })
 db.barberServices.belongsTo(db.services, { foreignKey: "serviceId" })
 db.customers.hasMany(db.appointments, { foreignKey: "customerId" })
+
+db.appointments.belongsTo(db.barberServices, { foreignKey: "barberServiceId" })
+db.barberServices.hasMany(db.appointments, { foreignKey: "barberServiceId" })
 db.appointments.belongsTo(db.customers, { foreignKey: "customerId" })
-db.barbers.hasMany(db.appointments, { foreignKey: "barberId" })
-db.appointments.belongsTo(db.barbers, { foreignKey: "barberId" })
-db.services.hasMany(db.appointments, { foreignKey: "serviceId" })
-db.appointments.belongsTo(db.services, { foreignKey: "serviceId" })
+db.customers.hasMany(db.appointments, { foreignKey: "customerId" })
+
+//db.appointments.hasOne(db.barbers, { foreignKey: "barberId", through: db.barberServices  })
 
 sync = async () => {
     if (process.env.DROP_DB === "true") {
@@ -49,8 +51,8 @@ sync = async () => {
                 name: "Maire"
             },
             defaults: {
-                name: "Maire",
-                contact_details: "Maire@gmail.com",
+                name: "Murk",
+                contact_details: "Murk@gmail.com",
             }
         })
         console.log("barber created: ", createdB)
@@ -87,6 +89,18 @@ sync = async () => {
             }
         })
         console.log("customer created: ", createdC)
+
+        const [appointment, createdA] = await db.appointments.findOrCreate({
+            where: {
+                id: 1
+            },
+            defaults: {
+                customerId: customer.id,
+                barberServiceId: barberService.id,
+                datetime: "2021-05-05 12:00:00"
+            }
+        })
+        console.log("appointment created: ", createdA)
     }
     else {
         console.log("Begin ALTER")

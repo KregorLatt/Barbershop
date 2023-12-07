@@ -4,16 +4,18 @@ export default {
     <table id=appointmentsTable class="table table-striped table-bordered">
     <thead>    
         <tr>
-            <th>customerId</th>
-            <th>serviceId</th>
-            <th>barberId</th>
+            <th>Customer</th>
+            <th>Barber</th>
+            <th>Service</th>
             <th>datetime</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="appointment in appointments">
-            <td @click="getAppointment(appointment.id)">{{appointment.customerId}}</td>
-            <td>{{appointment.serviceId}}</td><td>{{appointment.barberId}}</td><td>{{appointment.datetime}}</td>
+            <td @click="getAppointment(appointment.id)">{{appointment.Customer.name}}</td>
+            <td>{{appointment.BarberService.Barber.name}}</td>
+            <td>{{appointment.BarberService.Service.service_name}}</td>
+            <td>{{appointment.datetime}}</td>
         </tr>
         </tbody>
     </table>

@@ -1,5 +1,6 @@
 import confirmationModal from "../ConfirmationModal.js";
-
+import appointmentDetails from "./AppointmentDetails.js";
+import appointmentForm from "./AppointmentForm.js";
 export default {
    /*html*/
    template: `
@@ -10,35 +11,8 @@ export default {
                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                </div>
                <div class="modal-body">
-                   <table class="table table-striped">
-                       <tr>
-                           <th>Id</th>
-                           <td>{{appointmentInModal.id}}</td>
-                       </tr>
-                       <tr>
-                           <th>customerId</th>
-                           <td v-if="isEditing"><input v-model="modifiedappointment.customerId"></td>
-                           <td v-else>{{appointmentInModal.customerId}}</td>
-                       </tr>
-                       <tr>
-                           <th>barberId</th>
-                           <td v-if="isEditing"><input v-model="modifiedappointment.barberId"></td>
-                           <td v-else>{{appointmentInModal.barberId}}</td>
-                       </tr>
-
-                       <tr>
-                       <th>serviceId</th>
-                       <td v-if="isEditing"><input v-model="modifiedappointment.serviceId"></td>
-                       <td v-else>{{appointmentInModal.serviceId}}</td>
-                   </tr>
-
-                   <tr>
-                       <th>datetime</th>
-                       <td v-if="isEditing"><input v-model="modifiedappointment.datetime"></td>
-                       <td v-else>{{appointmentInModal.datetime}}</td>
-                   </tr>
-
-                   </table>
+                    <appointment-form v-if="isEditing" v-model:id="modifiedAppointment.id" v-model:customerId="modifiedAppointment.customerId" v-model:barberServiceId="modifiedAppointment.barberServiceId" v-model:datetime="modifiedAppointment.datetime"></appointment-form>
+                    <appointment-details v-else :appointmentInModal="appointmentInModal"></appointment-details>
                </div>
                <div class="modal-footer">
                    <div class="container">
@@ -67,54 +41,56 @@ export default {
    </div>
    <confirmation-modal :target="'#appointmentInfoModal'" @confirmed="deleteAppointment"></confirmation-modal>
    ` ,
-   components: {
-    confirmationModal
-},
-emits: ["appointmentUpdated"],
-props: {
-    appointmentInModal: {}
-},
-data() {
-    return {
-        isEditing: false,
-        modifiedAppointment: {}
+    components: {
+        confirmationModal,
+        appointmentDetails,
+        appointmentForm
+    },
+    emits: ["appointmentUpdated"],
+    props: {
+        appointmentInModal: {}
+    },
+    data() {
+        return {
+            isEditing: false,
+            modifiedAppointment: {},
+        }
+    },
+    methods: {
+        startEditing() {
+            this.modifiedAppointment = { ...this.appointmentInModal }
+            this.isEditing = true
+        },
+        cancelEditing() {
+            this.isEditing = false
+        },
+        async saveModifiedAppointment() {
+            console.log("Saving:", this.modifiedAppointment);
+            const rawResponse = await fetch(this.API_URL + "/appointments/" + this.modifiedAppointment.id, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.modifiedAppointment)
+            });
+            console.log(rawResponse);
+            this.$emit("appointmentUpdated", this.modifiedAppointment)
+            this.isEditing = false
+        },
+        async deleteAppointment() {
+            console.log("Deleting:", this.modifiedAppointment);
+            const rawResponse = await fetch(this.API_URL + "/appointments/" + this.modifiedAppointment.id, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.modifiedAppointment)
+            });
+            console.log(rawResponse);
+            this.$emit("appointmentUpdated", this.modifiedAppointment)
+            this.isEditing = false
+        }
     }
-},
-methods: {
-    startEditing() {
-        this.modifiedAppointment = { ...this.appointmentInModal }
-        this.isEditing = true
-    },
-    cancelEditing() {
-        this.isEditing = false
-    },
-    async saveModifiedAppointment() {
-        console.log("Saving:", this.modifiedAppointment);
-        const rawResponse = await fetch(this.API_URL + "/appointments/" + this.modifiedAppointment.id, {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.modifiedAppointment)
-        });
-        console.log(rawResponse);
-        this.$emit("appointmentUpdated", this.modifiedAppointment)
-        this.isEditing = false
-    },
-    async deleteAppointment() {
-        console.log("Deleting:", this.modifiedAppointment);
-        const rawResponse = await fetch(this.API_URL + "/appointments/" + this.modifiedAppointment.id, {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.modifiedAppointment)
-        });
-        console.log(rawResponse);
-        this.$emit("appointmentUpdated", this.modifiedAppointment)
-        this.isEditing = false
-    }
-}
 }

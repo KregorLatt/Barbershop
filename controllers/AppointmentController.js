@@ -17,11 +17,48 @@ exports.createNew = async (req, res) => {
 
 //Read
 exports.getAll = async (req, res) => {
-    const result = await appointments.findAll({ attributes: ["id","customerId", "barberServiceId", "datetime"] })
-    res.json(result)
-}
+  const result = await appointments.findAll({
+    attributes: ["id", "customerId", "barberServiceId", "datetime"],
+    include: [
+      {
+        model: db.customers,
+      },
+      {
+        model: db.barberServices,
+        include: [
+          {
+            model: db.barbers,
+          },
+          {
+            model: db.services,
+          },
+        ],
+      },
+    ],
+  });
+
+  res.json(result);
+};
+
 exports.getById = async (req, res) => {
-    const foundAppointment = await appointments.findByPk(req.params.id)
+    const foundAppointment = await appointments.findByPk(req.params.id, {
+        include: [
+          {
+            model: db.customers,
+          },
+          {
+            model: db.barberServices,
+            include: [
+              {
+                model: db.barbers,
+              },
+              {
+                model: db.services,
+              },
+            ],
+          },
+        ],
+      });
     if (foundAppointment === null) {
         return res.status(404).send({ error: `Appointment not found` })
     }
