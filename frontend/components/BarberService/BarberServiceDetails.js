@@ -18,6 +18,12 @@ export default {
         <th>Service</th>
         <td>{{service}}</td>
     </tr>
+    <tr>
+    <th>Appointments</th>
+    <td v-for="appointment in barberServiceInModal.appointments">
+        {{appointment.datetime}} - {{appointment.BarberService.Barber.name}} - {{appointment.BarberService.Service.name}}
+    </td>
+</tr>
 </table>`,
     props: ["barberServiceInModal","barber","service"]
 }

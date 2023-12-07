@@ -17,8 +17,13 @@ exports.createNew = async (req, res) => {
 
 // Function to format datetime to a string suitable for HTML datetime-local input
 const formatDatetimeForHTMLInput = (datetime) => {
+  if (!datetime) {
+    // If datetime is undefined or null, return an empty string or handle as needed
+    return "";
+  }
+
   const pad = (value) => (value < 10 ? `0${value}` : value);
-  
+
   const date = new Date(datetime);
   const year = date.getFullYear();
   const month = pad(date.getMonth() + 1);
