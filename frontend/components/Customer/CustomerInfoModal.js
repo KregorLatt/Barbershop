@@ -40,7 +40,7 @@ export default {
         </div>
     </div>
 </div>
-<confirmation-modal :target="'#customerInfoModal'" @confirmed="deletecustomer"></confirmation-modal>
+<confirmation-modal :target="'#customerInfoModal'" @confirmed="deleteCustomer"></confirmation-modal>
     `,
     components: {
         confirmationModal,
@@ -81,6 +81,11 @@ export default {
         },
         deleteCustomer() {
             console.log("DELETE confirmed");
+            fetch(this.API_URL + "/customers/" + this.customerInModal.id, {
+                method: 'DELETE'
+            });
+            this.$emit("customerUpdated", {})
+            this.isEditing = false
         }
     }
     }
