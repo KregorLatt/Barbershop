@@ -9,7 +9,7 @@ export default {
     <customer-list :key="update" @showModal="openModal"></customer-list>
     <customer-info-modal @customerUpdated="updateView" :customerInModal="customerInModal"></customer-info-modal>
     <new-object-modal id="newCustomerModal" @save="saveNewCustomer">
-        <customer-form v-model:name="customerInModal.name" v-model:price="customerInModal.price"></customer-form>
+        <customer-form v-model:name="customerInModal.name" v-model:contact_details="customerInModal.contact_details"></customer-form>
         <div class="alert alert-danger" role="alert" v-show="error">{{error}}</div>
     </new-object-modal>
     `,
@@ -34,12 +34,11 @@ export default {
             let customerInfoModal = new bootstrap.Modal(document.getElementById("customerInfoModal"))
             customerInfoModal.show()
         },
-            newCustomer() {
-                this.error = ""
-                this.customerInModal = {}
-                this.newCustomerModal = new bootstrap.Modal(document.getElementById("newCustomerModal"))
-                this.newCustomerModal.show()
-           
+        newCustomer() {
+            this.error = ""
+            this.customerInModal = {}
+            this.newCustomerModal = new bootstrap.Modal(document.getElementById("newCustomerModal"))
+            this.newCustomerModal.show()
         },
         updateView(customer) {
             this.update++

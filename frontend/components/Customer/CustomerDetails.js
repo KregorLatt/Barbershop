@@ -11,7 +11,7 @@ export default {
         <td>{{customerInModal.name}}</td>
     </tr>
     <tr>
-        <th>Price</th>
+        <th>Contact details</th>
         <td>{{customerInModal.contact_details}}</td>
     </tr>
 </table>`,
