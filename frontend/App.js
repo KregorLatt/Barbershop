@@ -22,7 +22,7 @@ export default {
                 <router-link class="nav-link" to="/customers">Customers</router-link>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              <router-link class="nav-link" to="/barberservices">Barber Services</router-link>
               </li>
             </ul>
             <form class="d-flex" role="search">

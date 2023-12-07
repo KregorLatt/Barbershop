@@ -22,7 +22,9 @@ exports.getAll = async (req, res) => {
     res.json(result)
 }
 exports.getById = async (req, res) => {
-    const foundBarberService = await barberService.findByPk(req.params.id)
+    const foundBarberService = await barberService.findByPk(req.params.id, {
+        include: [db.barbers, db.services]
+    })
     if (foundBarberService === null) {
         return res.status(404).send({ error: `BarberService not found` })
     }

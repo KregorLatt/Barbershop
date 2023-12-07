@@ -6,13 +6,15 @@ import BarbersView from './views/BarbersView.js'
 import ServicesView from './views/ServicesView.js'
 import AppointmentsView from './views/AppointmentsView.js'
 import CustomersView from './views/CustomersView.js'
+import BarberServicesView from './views/BarberServicesView.js'
 
 
 const routes = [
     { path: "/barbers", component: BarbersView },
     { path: "/services", component: ServicesView },
     { path: "/appointments", component: AppointmentsView },
-    { path: "/customers", component: CustomersView }
+    { path: "/customers", component: CustomersView },
+    { path: "/barberservices", component: BarberServicesView }
 ]
 
 const router = createRouter({
