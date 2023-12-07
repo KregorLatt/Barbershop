@@ -569,14 +569,12 @@ paths:
                                         -
                                             id: 1
                                             customerId: 1
-                                            barberId: 1
-                                            serviceId: 1
+                                            barberServiceId: 1
                                             datetime: 12/02/2002
                                         -
                                             id: 2
                                             customerId: 2
-                                            barberId: 1
-                                            serviceId: 1
+                                            barberServiceId: 1
                                             datetime: 13/02/2002
                     description: Retutns a list of appointments
             summary: Get a list of all appointment
@@ -591,8 +589,7 @@ paths:
                             example:
                                 value:
                                     customerId: 1
-                                    barberId: 1
-                                    serviceId: 1
+                                    barberServiceId: 1
                                     datetime: 31/01/1970
                 required: true
             tags:
@@ -617,8 +614,7 @@ paths:
                                     value:
                                         id: 1
                                         customerId: 1
-                                        barberId: 1
-                                        serviceId: 1
+                                        barberServiceId: 1
                                         datetime: 12/02/2002
                     description: Found appointment
                 '404':
@@ -634,8 +630,7 @@ paths:
                                 value:
                                     id: 1
                                     customerId: 1
-                                    barberId: 1
-                                    serviceId: 1
+                                    barberServiceId: 1
                                     datetime: 17/09/2020
                 required: true
             tags:
@@ -819,15 +814,12 @@ components:
                 customerId:
                     description: ''
                     type: integer
-                barberId:
-                    description: ''
-                    type: integer
-                serviceId:
-                    description: ''
-                    type: integer
                 datetime:
                     description: ''
                     type: string
+                barberServiceId:
+                    description: ''
+                    type: integer
         customer:
             description: ''
             required: []

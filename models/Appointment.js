@@ -1,4 +1,4 @@
-module.exports = (dbConnection, Sequelize, Customer, Service, Barber) => {
+module.exports = (dbConnection, Sequelize, Customer, BarberService) => {
     const Appointment = dbConnection.define("Appointment", {
         id: {
             type: Sequelize.INTEGER,
@@ -13,19 +13,11 @@ module.exports = (dbConnection, Sequelize, Customer, Service, Barber) => {
                 key: "id"
             }
         },
-        barberId: {
+        barberServiceId: {
             type: Sequelize.INTEGER,
             allowNull: false,
             references: {
-                model: Barber,
-                key: "id"
-            }
-        },
-        serviceId: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-            references: {
-                model: Service,
+                model: BarberService,
                 key: "id"
             }
         },
