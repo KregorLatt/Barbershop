@@ -11,7 +11,7 @@ export default {
         <td><input :value="name" @input="$emit('update:name',$event.target.value)"></td>
     </tr>
     <tr>
-        <th>Contact_details</th>
+        <th>Contact details</th>
         <td><input :value="contact_details" @input="$emit('update:contact_details',$event.target.value)"></td>
     </tr>
 </table>`,

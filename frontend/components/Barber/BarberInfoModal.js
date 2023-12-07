@@ -82,6 +82,11 @@ export default {
         },
         deleteBarber() {
             console.log("DELETE confirmed");
+            fetch(this.API_URL + "/barbers/" + this.barberInModal.id, {
+                method: 'DELETE'
+            });
+            this.$emit("barberUpdated", {})
+            this.isEditing = false
         }
     }
     }

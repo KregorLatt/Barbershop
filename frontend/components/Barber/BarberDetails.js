@@ -11,7 +11,7 @@ export default {
         <td>{{barberInModal.name}}</td>
     </tr>
     <tr>
-        <th>Contact_details</th>
+        <th>Contact details</th>
         <td>{{barberInModal.contact_details}}</td>
     </tr>
 </table>`,

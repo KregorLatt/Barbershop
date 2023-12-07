@@ -5,7 +5,7 @@ export default {
     <thead>
         <tr>
             <th>Name</th>
-            <th>Contact_Details</th>
+            <th>Contact Details</th>
         </tr>
         </thead>
         <tbody>
