@@ -4,15 +4,22 @@ const { getBaseurl } = require("./helpers.js")
 
 //Create
 exports.createNew = async (req, res) => {
+  try {
     if (!req.body.customerId || !req.body.barberServiceId || !req.body.datetime) {
-        return res.status(400).send({ error: "one or more parameters are missing" })
+        return res.status(400).send({ error: "One or more parameters are missing" });
     }
+
     const createdAppointment = await appointments.create(req.body, {
-        fields: ["id", "customerId", "barberServiceId", "datetime"]
-    })
+        fields: ["customerId", "barberServiceId", "datetime"]
+    });
+
     res.status(201)
         .location(`${getBaseurl(req)}/appointments/${createdAppointment.id}`)
-        .json(createdAppointment)
+        .json(createdAppointment);
+  } catch (error) {
+      console.error("Error creating appointment:", error);
+      res.status(500).send({ error: "Internal Server Error" });
+  }
 }
 
 // Function to format datetime to a string suitable for HTML datetime-local input

@@ -15,7 +15,7 @@ export default {
     <tr>
         <th>Barber Service</th>
         <select :value="barberServiceId" @input="$emit('update:barberServiceId',$event.target.value)">
-            <option v-for="barberService in barberServices" :value="barberService.id">{{barberService.Barber.name}} - {{barberService.Service.service_name}}</option>
+            <option v-for="barberService in barberServices" :value="barberService.id">{{barberService.Barber.name}} - {{barberService.Service.service_name}} - {{barberService.price}}</option>
         </select>
     </tr>
     <tr>

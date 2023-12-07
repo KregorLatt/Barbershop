@@ -5,17 +5,15 @@ export default {
     <thead>    
         <tr>
             <th>Customer</th>
-            <th>Barber</th>
-            <th>Service</th>
+            <th>Barber Service</th>
             <th>datetime</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="appointment in appointments">
-            <td @click="getAppointment(appointment.id)">{{appointment.Customer.name}}</td>
-            <td>{{appointment.BarberService.Barber.name}}</td>
-            <td>{{appointment.BarberService.Service.service_name}}</td>
-            <td>{{appointment.datetime}}</td>
+            <td @click="getAppointment(appointment.id)">{{ appointment.Customer.name }}</td>
+            <td>{{ appointment.BarberService.Barber.name }} - {{appointment.BarberService.Service.service_name}} - {{appointment.BarberService.price}}</td>
+            <td>{{ appointment.datetime }}</td>
         </tr>
         </tbody>
     </table>

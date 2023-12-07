@@ -21,7 +21,7 @@ db.barbers = require("./models/Barber")(sequelize, Sequelize)
 db.services = require("./models/Service")(sequelize, Sequelize)
 db.barberServices = require("./models/BarberService")(sequelize, Sequelize, db.barbers, db.services)
 db.customers = require("./models/Customer")(sequelize, Sequelize)
-db.appointments = require("./models/Appointment")(sequelize, Sequelize, db.customers, db.services, db.barbers)
+db.appointments = require("./models/Appointment")(sequelize, Sequelize, db.customers, db.barberServices)
 
 db.barbers.hasMany(db.barberServices, { foreignKey: "barberId", onDelete: 'CASCADE' });
 db.barberServices.belongsTo(db.barbers, { foreignKey: "barberId", onDelete: 'CASCADE' });

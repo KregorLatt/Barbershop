@@ -4,7 +4,7 @@ const { getBaseurl } = require("./helpers")
 
 // CREATE
 exports.createNew = async (req, res) => {
-    if (!req.body.barberId || !req.body.serviceId) {
+    if (!req.body.barberId || !req.body.serviceId || !req.body.price) {
         return res.status(400).send({ error: "One or all required parameters are missing" })
     }
     const createdBarberService = await barberService.create(req.body, {

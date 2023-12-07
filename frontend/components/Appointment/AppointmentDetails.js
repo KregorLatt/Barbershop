@@ -13,13 +13,8 @@ export default {
     </tr>
     <tr>
         <th>Barber</th>
-        <td v-if="appointmentInModal.BarberService">{{ appointmentInModal.BarberService.Barber.name }}</td>
-        <td v-else>No barber information available</td>
-    </tr>
-    <tr>
-        <th>Service</th>
-        <td v-if="appointmentInModal.BarberService">{{ appointmentInModal.BarberService.Service.service_name }}</td>
-        <td v-else>No service information available</td>
+        <td v-if="appointmentInModal.BarberService" >{{ appointmentInModal.BarberService.Barber.name }} - {{appointmentInModal.BarberService.Service.service_name}} - {{appointmentInModal.BarberService.price}}</td>
+        <td v-else>No barber service information available</td>
     </tr>
     <tr>
         <th>Datetime</th>

@@ -416,8 +416,8 @@ paths:
                             example:
                                 value:
                                     customerId: 1
+                                    datetime: '2018-02-10T09:30Z'
                                     barberServiceId: 1
-                                    datetime: 31/01/1970
                 required: true
             tags:
                 - appointments
@@ -458,7 +458,7 @@ paths:
                                     id: 1
                                     customerId: 1
                                     barberServiceId: 1
-                                    datetime: 17/09/2020
+                                    datetime: '1910-02-10T09:30Z'
                 required: true
             tags:
                 - appointments
@@ -815,6 +815,7 @@ components:
                     description: ''
                     type: integer
                 datetime:
+                    format: date-time
                     description: ''
                     type: string
                 barberServiceId:
