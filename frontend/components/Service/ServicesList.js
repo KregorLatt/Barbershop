@@ -10,7 +10,7 @@ export default {
         </thead>
         <tbody>
             <tr v-for="service in services">
-                <td @click="getservice(service.id)">{{ service.service_name }}</td>
+                <td @click="getService(service.id)">{{ service.service_name }}</td>
                 <td>{{ service.description }}</td>
             </tr>
         </tbody>
@@ -26,7 +26,7 @@ export default {
         this.services = await (await fetch("http://localhost:8080/services")).json()
     },
     methods: {
-        getservice: async function (id) {
+        getService: async function (id) {
             const serviceInModal = await (await fetch(this.API_URL + "/services/" + id)).json()
             this.$emit("showModal", serviceInModal)
         }
