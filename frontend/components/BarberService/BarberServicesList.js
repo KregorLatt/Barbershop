@@ -25,7 +25,7 @@ export default {
         }
     },
     async created() {
-        this.barberServices = await (await fetch("http://localhost:8080/barberservices")).json()
+        this.barberServices = await (await fetch("http://localhost:1025/barberservices")).json()
     },
     methods: {
         getBarberService: async function (id) {

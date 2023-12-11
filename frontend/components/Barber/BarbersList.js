@@ -23,7 +23,7 @@ export default {
         }
     },
     async created() {
-        this.barbers = await (await fetch("http://localhost:8080/barbers")).json()
+        this.barbers = await (await fetch("http://localhost:1025/barbers")).json()
     },
     methods: {
         getBarber: async function (id) {

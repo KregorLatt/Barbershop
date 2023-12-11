@@ -68,8 +68,8 @@ export default {
         }
     },
     async created() {
-        this.barbers  = await (await fetch("http://localhost:8080/barbers")).json()
-        this.services = await (await fetch("http://localhost:8080/services")).json()
+        this.barbers  = await (await fetch("http://localhost:1025/barbers")).json()
+        this.services = await (await fetch("http://localhost:1025/services")).json()
     },
     data() {
         return {

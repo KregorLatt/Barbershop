@@ -23,10 +23,10 @@ export default{
             }
         },
         async created(){
-            this.customers = await (await fetch("http://localhost:8080/customers")).json()
+            this.customers = await (await fetch("http://localhost:1025/customers")).json()
         },
         // async beforeUpdate() {
-    //     this.customers = await (await fetch("http://localhost:8080/customers")).json()
+    //     this.customers = await (await fetch("http://localhost:1025/customers")).json()
     // },
         methods: {
             getCustomer: async function (id) {

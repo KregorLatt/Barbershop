@@ -23,7 +23,7 @@ export default {
         }
     },
     async created() {
-        this.services = await (await fetch("http://localhost:8080/services")).json()
+        this.services = await (await fetch("http://localhost:1025/services")).json()
     },
     methods: {
         getService: async function (id) {

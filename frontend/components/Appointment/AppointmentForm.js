@@ -32,7 +32,7 @@ export default {
         }
     },
     async created() {
-        this.customers = await (await fetch("http://localhost:8080/customers")).json()
-        this.barberServices = await (await fetch("http://localhost:8080/barberServices")).json()
+        this.customers = await (await fetch("http://localhost:1025/customers")).json()
+        this.barberServices = await (await fetch("http://localhost:1025/barberServices")).json()
     }
 }

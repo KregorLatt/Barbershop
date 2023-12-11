@@ -25,7 +25,7 @@ export default {
         }
     },
     async created() {
-        this.appointments = await (await fetch("http://localhost:8080/appointments")).json()
+        this.appointments = await (await fetch("http://localhost:1025/appointments")).json()
     },
     methods: {
         getAppointment: async function (id) {

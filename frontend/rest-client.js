@@ -28,5 +28,5 @@ const app = createApp(App)
 
 app.use(router)
 
-app.config.globalProperties.API_URL = 'http://localhost:8080'
+app.config.globalProperties.API_URL = 'http://localhost:1025'
 app.mount('#app')
