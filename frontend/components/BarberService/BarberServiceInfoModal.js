@@ -13,7 +13,7 @@ export default {
             <div class="modal-body">
                 <barber-service-form v-if="isEditing" v-model:id="modifiedBarberService.id" v-model:price="modifiedBarberService.price"
                  v-model:barberId="modifiedBarberService.barberId" v-model:serviceId="modifiedBarberService.serviceId" ></barber-service-form>
-                <barber-service-details v-else :barberServiceInModal="barberServiceInModal" :barber="barberName" :service="serviceName"></barber-service-details>
+                <barber-service-details v-else :barberServiceInModal="barberServiceInModal" :barber="barberName" :service="serviceName" :appointments="appointments"></barber-service-details>
             </div>
             <div class="modal-footer">
                 <div class="container">
@@ -76,10 +76,22 @@ export default {
             isEditing: false,
             modifiedBarberService: {},
             barbers: [],
-            services: []
+            services: [],
+            appointments: []
+        }
+    },
+    watch: {
+        'barberServiceInModal.id': function(newVal) {
+            if (newVal) {
+                this.fetchAppointments();
+            }
         }
     },
     methods: {
+        async fetchAppointments(){
+            const appointments = await (await fetch(this.API_URL + "/appointments/")).json();
+            this.appointments = appointments.filter(appointment => appointment.barberServiceId == this.barberServiceInModal.id)
+        },
         startEditing() {
             this.modifiedBarberService = { ...this.barberServiceInModal }
             this.isEditing = true

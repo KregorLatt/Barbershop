@@ -12,7 +12,7 @@ export default {
         <td v-else>No customer information available</td>
     </tr>
     <tr>
-        <th>Barber</th>
+        <th>Barber Service</th>
         <td v-if="appointmentInModal.BarberService" >{{ appointmentInModal.BarberService.Barber.name }} - {{appointmentInModal.BarberService.Service.service_name}} - {{appointmentInModal.BarberService.price}}</td>
         <td v-else>No barber service information available</td>
     </tr>

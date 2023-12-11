@@ -17,13 +17,13 @@ exports.createNew = async (req, res) => {
 // READ
 exports.getAll = async (req, res) => {
     const result = await barberService.findAll({
-        include: [db.barbers, db.services]
+        include: [db.barbers, db.services, db.appointments]
     })
     res.json(result)
 }
 exports.getById = async (req, res) => {
     const foundBarberService = await barberService.findByPk(req.params.id, {
-        include: [db.barbers, db.services]
+        include: [db.barbers, db.services, db.appointments]
     })
     if (foundBarberService === null) {
         return res.status(404).send({ error: `BarberService not found` })
