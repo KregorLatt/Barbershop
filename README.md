@@ -3,6 +3,12 @@
 
 
 Meie juuksurisalongi  API abil saate jätta hüvasti registreerimisega seotud raskuste ja kliendihaldus probleemidega. Soovime Suurendada salongi tõhusust ja pakkuda suurepärast kliendikogemust.
+Api abil saab:
+1.Lisada uusi töötajaid (juuksureid)
+2.Registreerida uusi lõikusi, teenuseid
+3.Lisada uusi kliente
+4.Registeerida klientidele lõikusaegu
+5.Hallata juuksurite tehtavaid lõikusi, jälgida nende tulevaid sessioone.
 
 
 How to Run the Project
