@@ -14,6 +14,14 @@ export default {
         <th>Contact details</th>
         <td>{{barberInModal.contact_details}}</td>
     </tr>
+    <tr>
+        <th>Appointments</th>
+        <td>
+        <span v-for="appointment in appointments" :key="appointment.id">
+            {{appointment.datetime}} - {{appointment.Customer.name}} - {{appointment.BarberService.Service.service_name}} <br>
+        </span>
+        </td>
+    </tr>
 </table>`,
-    props: ["barberInModal"]
+    props: ["barberInModal", "appointments"]
 }
